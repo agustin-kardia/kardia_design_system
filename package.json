@@ -1,0 +1,22 @@
+{
+  "name": "design-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "tokens:extract": "node scripts/extract-tokens.mjs",
+    "tokens:build": "node sd.config.js",
+    "tokens:sync": "npm run tokens:extract && npm run tokens:build",
+    "tokens:watch": "chokidar \"tokens/tokens.json\" -c \"npm run tokens:build\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "style-dictionary": "^4.3.0"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0"
+  }
+}

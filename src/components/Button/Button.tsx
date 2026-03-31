@@ -13,10 +13,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const sizeStyles: Record<ButtonSize, string> = {
-  small:  'h-8  px-3 gap-1.5 text-sm  rounded-[var(--border-radius-action)]',
-  medium: 'h-10 px-3 gap-2  text-base rounded-[var(--border-radius-action)]',
-  large:  'h-12 px-4 gap-2  text-base rounded-[var(--border-radius-action)]',
-  xlarge: 'h-14 px-5 gap-2  text-base rounded-[var(--border-radius-action)]',
+  small:  'h-8  px-3 gap-1.5 text-sm',
+  medium: 'h-10 px-3 gap-2  text-base',
+  large:  'h-12 px-4 gap-2  text-base',
+  xlarge: 'h-14 px-5 gap-2  text-xl',
 };
 
 const iconSizes: Record<ButtonSize, string> = {
@@ -105,7 +105,7 @@ export function Button({
         fullWidth ? 'w-full' : '',
         className ?? '',
       ].join(' ')}
-      style={{ ...getBaseStyle(variant, !!disabled), ...style }}
+      style={{ borderRadius: 'var(--border-radius-action)', ...getBaseStyle(variant, !!disabled), ...style }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}

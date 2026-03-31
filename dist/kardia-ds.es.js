@@ -43,10 +43,10 @@ function a({ type: e = "neutral", title: a, subtitle: o, icon: s, actions: c, cl
 //#endregion
 //#region src/components/Button/Button.tsx
 var o = {
-	small: "h-8  px-3 gap-1.5 text-sm  rounded-[var(--border-radius-action)]",
-	medium: "h-10 px-3 gap-2  text-base rounded-[var(--border-radius-action)]",
-	large: "h-12 px-4 gap-2  text-base rounded-[var(--border-radius-action)]",
-	xlarge: "h-14 px-5 gap-2  text-base rounded-[var(--border-radius-action)]"
+	small: "h-8  px-3 gap-1.5 text-sm",
+	medium: "h-10 px-3 gap-2  text-base",
+	large: "h-12 px-4 gap-2  text-base",
+	xlarge: "h-14 px-5 gap-2  text-xl"
 }, s = {
 	small: "size-4",
 	medium: "size-5",
@@ -97,6 +97,7 @@ function u({ variant: e = "primary", size: r = "medium", leftIcon: i, rightIcon:
 			f ?? ""
 		].join(" "),
 		style: {
+			borderRadius: "var(--border-radius-action)",
 			...l(e, !!d),
 			...p
 		},

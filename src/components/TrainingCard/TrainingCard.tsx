@@ -67,9 +67,7 @@ export function TrainingCard({
         </div>
 
         <div className={styles.spots}>
-          <span className={styles.spotsIcon}>
-            <Icon name="group" size={24} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />
-          </span>
+          <Icon name="group" size={40} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />
           <p className={styles.spotsCount}>{spotsUsed}/{spotsTotal}</p>
         </div>
 

@@ -143,9 +143,6 @@ export function TrainingCard({
           <Button
             size="xlarge"
             variant="primary"
-            leftIcon={
-              <Icon name="calendar_add_on" size={24} weight={300} variant="rounded" fill={0} color="var(--color-icon-contained)" />
-            }
             onClick={(e) => { e.stopPropagation(); onCheckin?.(e); }}
           >
             Check-in

@@ -301,14 +301,6 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 					children: /* @__PURE__ */ t(u, {
 						size: "xlarge",
 						variant: "primary",
-						leftIcon: /* @__PURE__ */ t(f, {
-							name: "calendar_add_on",
-							size: 24,
-							weight: 300,
-							variant: "rounded",
-							fill: 0,
-							color: "var(--color-icon-contained)"
-						}),
 						onClick: (e) => {
 							e.stopPropagation(), p?.(e);
 						},

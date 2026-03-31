@@ -12,41 +12,31 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   children: React.ReactNode;
 }
 
-const sizeStyles: Record<ButtonSize, string> = {
-  small:  'h-8  px-3 gap-1.5 text-sm',
-  medium: 'h-10 px-3 gap-2  text-base',
-  large:  'h-12 px-4 gap-2  text-base',
-  xlarge: 'h-14 px-5 gap-2  text-xl',
+const sizeInlineStyles: Record<ButtonSize, React.CSSProperties> = {
+  small:  { height: 32,  paddingLeft: 12, paddingRight: 12, gap: 6,  fontSize: 14 },
+  medium: { height: 40,  paddingLeft: 12, paddingRight: 12, gap: 8,  fontSize: 16 },
+  large:  { height: 48,  paddingLeft: 16, paddingRight: 16, gap: 8,  fontSize: 16 },
+  xlarge: { height: 56,  paddingLeft: 20, paddingRight: 20, gap: 8,  fontSize: 20 },
 };
 
-const iconSizes: Record<ButtonSize, string> = {
-  small:  'size-4',
-  medium: 'size-5',
-  large:  'size-6',
-  xlarge: 'size-6',
+const iconSizePx: Record<ButtonSize, number> = {
+  small: 16, medium: 20, large: 24, xlarge: 24,
 };
 
-function getVariantClasses(variant: ButtonVariant, disabled: boolean): string {
-  if (disabled) {
-    if (variant === 'secondary') return 'border border-[var(--color-border-high)] cursor-not-allowed';
-    return 'cursor-not-allowed';
-  }
-  if (variant === 'secondary') return 'border border-[var(--color-border-high)]';
-  return '';
-}
-
-function getBaseStyle(variant: ButtonVariant, disabled: boolean): React.CSSProperties {
+function getVariantStyle(variant: ButtonVariant, disabled: boolean): React.CSSProperties {
   if (disabled) {
     return {
       background: variant === 'primary' ? 'var(--color-interaction-primary-disabled)' : undefined,
       color: 'var(--color-text-disabled)',
+      border: variant === 'secondary' ? '1px solid var(--color-border-high)' : undefined,
+      cursor: 'not-allowed',
     };
   }
   if (variant === 'primary') {
     return { background: 'var(--color-interaction-primary-enabled)', color: 'var(--color-text-contained)' };
   }
   if (variant === 'secondary') {
-    return { color: 'var(--color-text-primary)' };
+    return { color: 'var(--color-text-primary)', border: '1px solid var(--color-border-high)' };
   }
   return { color: 'var(--color-text-branded)' };
 }
@@ -77,7 +67,7 @@ export function Button({
     if (disabled) return;
     const el = e.currentTarget as HTMLElement;
     if (isPrimary) el.style.background = 'var(--color-interaction-primary-enabled)';
-    if (isSecondary) el.style.borderColor = '';
+    if (isSecondary) el.style.borderColor = 'var(--color-border-high)';
     if (variant === 'tertiary') el.style.textDecoration = '';
   }
   function handleMouseDown(e: React.MouseEvent<HTMLButtonElement>) {
@@ -95,26 +85,50 @@ export function Button({
     if (variant === 'tertiary') el.style.opacity = '';
   }
 
+  const iconSize = iconSizePx[size];
+
   return (
     <button
       disabled={disabled}
-      className={[
-        'inline-flex items-center justify-center font-semibold font-[Archivo] transition-colors select-none',
-        sizeStyles[size],
-        getVariantClasses(variant, !!disabled),
-        fullWidth ? 'w-full' : '',
-        className ?? '',
-      ].join(' ')}
-      style={{ borderRadius: 'var(--border-radius-action)', ...getBaseStyle(variant, !!disabled), ...style }}
+      className={[className ?? ''].join(' ').trim() || undefined}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'Archivo, sans-serif',
+        fontWeight: 600,
+        lineHeight: 1,
+        whiteSpace: 'nowrap',
+        userSelect: 'none',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        borderRadius: 'var(--border-radius-action)',
+        width: fullWidth ? '100%' : undefined,
+        transition: 'background 0.15s, opacity 0.15s',
+        border: 'none',
+        outline: 'none',
+        boxSizing: 'border-box',
+        flexShrink: 0,
+        ...sizeInlineStyles[size],
+        ...getVariantStyle(variant, !!disabled),
+        ...style,
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       {...props}
     >
-      {leftIcon && <span className={`shrink-0 inline-flex items-center justify-center ${iconSizes[size]}`}>{leftIcon}</span>}
-      <span className="truncate">{children}</span>
-      {rightIcon && <span className={`shrink-0 inline-flex items-center justify-center ${iconSizes[size]}`}>{rightIcon}</span>}
+      {leftIcon && (
+        <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: iconSize, height: iconSize, flexShrink: 0 }}>
+          {leftIcon}
+        </span>
+      )}
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{children}</span>
+      {rightIcon && (
+        <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: iconSize, height: iconSize, flexShrink: 0 }}>
+          {rightIcon}
+        </span>
+      )}
     </button>
   );
 }

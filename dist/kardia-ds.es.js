@@ -43,80 +43,134 @@ function a({ type: e = "neutral", title: a, subtitle: o, icon: s, actions: c, cl
 //#endregion
 //#region src/components/Button/Button.tsx
 var o = {
-	small: "h-8  px-3 gap-1.5 text-sm",
-	medium: "h-10 px-3 gap-2  text-base",
-	large: "h-12 px-4 gap-2  text-base",
-	xlarge: "h-14 px-5 gap-2  text-xl"
+	small: {
+		height: 32,
+		paddingLeft: 12,
+		paddingRight: 12,
+		gap: 6,
+		fontSize: 14
+	},
+	medium: {
+		height: 40,
+		paddingLeft: 12,
+		paddingRight: 12,
+		gap: 8,
+		fontSize: 16
+	},
+	large: {
+		height: 48,
+		paddingLeft: 16,
+		paddingRight: 16,
+		gap: 8,
+		fontSize: 16
+	},
+	xlarge: {
+		height: 56,
+		paddingLeft: 20,
+		paddingRight: 20,
+		gap: 8,
+		fontSize: 20
+	}
 }, s = {
-	small: "size-4",
-	medium: "size-5",
-	large: "size-6",
-	xlarge: "size-6"
+	small: 16,
+	medium: 20,
+	large: 24,
+	xlarge: 24
 };
 function c(e, t) {
-	return t ? e === "secondary" ? "border border-[var(--color-border-high)] cursor-not-allowed" : "cursor-not-allowed" : e === "secondary" ? "border border-[var(--color-border-high)]" : "";
-}
-function l(e, t) {
 	return t ? {
 		background: e === "primary" ? "var(--color-interaction-primary-disabled)" : void 0,
-		color: "var(--color-text-disabled)"
+		color: "var(--color-text-disabled)",
+		border: e === "secondary" ? "1px solid var(--color-border-high)" : void 0,
+		cursor: "not-allowed"
 	} : e === "primary" ? {
 		background: "var(--color-interaction-primary-enabled)",
 		color: "var(--color-text-contained)"
-	} : e === "secondary" ? { color: "var(--color-text-primary)" } : { color: "var(--color-text-branded)" };
+	} : e === "secondary" ? {
+		color: "var(--color-text-primary)",
+		border: "1px solid var(--color-border-high)"
+	} : { color: "var(--color-text-branded)" };
 }
-function u({ variant: e = "primary", size: r = "medium", leftIcon: i, rightIcon: a, fullWidth: u = !1, disabled: d = !1, className: f, style: p, children: m, ...h }) {
-	let g = e === "primary", _ = e === "secondary";
-	function v(t) {
-		if (d) return;
+function l({ variant: e = "primary", size: r = "medium", leftIcon: i, rightIcon: a, fullWidth: l = !1, disabled: u = !1, className: d, style: f, children: p, ...m }) {
+	let h = e === "primary", g = e === "secondary";
+	function _(t) {
+		if (u) return;
 		let n = t.currentTarget;
-		g && (n.style.background = "var(--color-interaction-primary-hover)"), _ && (n.style.borderColor = "var(--color-text-primary)"), e === "tertiary" && (n.style.textDecoration = "underline");
+		h && (n.style.background = "var(--color-interaction-primary-hover)"), g && (n.style.borderColor = "var(--color-text-primary)"), e === "tertiary" && (n.style.textDecoration = "underline");
+	}
+	function v(t) {
+		if (u) return;
+		let n = t.currentTarget;
+		h && (n.style.background = "var(--color-interaction-primary-enabled)"), g && (n.style.borderColor = "var(--color-border-high)"), e === "tertiary" && (n.style.textDecoration = "");
 	}
 	function y(t) {
-		if (d) return;
+		if (u) return;
 		let n = t.currentTarget;
-		g && (n.style.background = "var(--color-interaction-primary-enabled)"), _ && (n.style.borderColor = ""), e === "tertiary" && (n.style.textDecoration = "");
+		h && (n.style.background = "var(--color-interaction-primary-pressed)"), g && (n.style.background = "var(--color-base-low)"), e === "tertiary" && (n.style.opacity = "0.75");
 	}
 	function b(t) {
-		if (d) return;
+		if (u) return;
 		let n = t.currentTarget;
-		g && (n.style.background = "var(--color-interaction-primary-pressed)"), _ && (n.style.background = "var(--color-base-low)"), e === "tertiary" && (n.style.opacity = "0.75");
+		h && (n.style.background = "var(--color-interaction-primary-hover)"), g && (n.style.background = ""), e === "tertiary" && (n.style.opacity = "");
 	}
-	function x(t) {
-		if (d) return;
-		let n = t.currentTarget;
-		g && (n.style.background = "var(--color-interaction-primary-hover)"), _ && (n.style.background = ""), e === "tertiary" && (n.style.opacity = "");
-	}
+	let x = s[r];
 	return /* @__PURE__ */ n("button", {
-		disabled: d,
-		className: [
-			"inline-flex items-center justify-center font-semibold font-[Archivo] transition-colors select-none",
-			o[r],
-			c(e, !!d),
-			u ? "w-full" : "",
-			f ?? ""
-		].join(" "),
+		disabled: u,
+		className: [d ?? ""].join(" ").trim() || void 0,
 		style: {
+			display: "inline-flex",
+			alignItems: "center",
+			justifyContent: "center",
+			fontFamily: "Archivo, sans-serif",
+			fontWeight: 600,
+			lineHeight: 1,
+			whiteSpace: "nowrap",
+			userSelect: "none",
+			cursor: u ? "not-allowed" : "pointer",
 			borderRadius: "var(--border-radius-action)",
-			...l(e, !!d),
-			...p
+			width: l ? "100%" : void 0,
+			transition: "background 0.15s, opacity 0.15s",
+			border: "none",
+			outline: "none",
+			boxSizing: "border-box",
+			flexShrink: 0,
+			...o[r],
+			...c(e, !!u),
+			...f
 		},
-		onMouseEnter: v,
-		onMouseLeave: y,
-		onMouseDown: b,
-		onMouseUp: x,
-		...h,
+		onMouseEnter: _,
+		onMouseLeave: v,
+		onMouseDown: y,
+		onMouseUp: b,
+		...m,
 		children: [
 			i && /* @__PURE__ */ t("span", {
-				className: `shrink-0 inline-flex items-center justify-center ${s[r]}`,
+				style: {
+					display: "inline-flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: x,
+					height: x,
+					flexShrink: 0
+				},
 				children: i
 			}),
 			/* @__PURE__ */ t("span", {
-				className: "truncate",
-				children: m
+				style: {
+					overflow: "hidden",
+					textOverflow: "ellipsis"
+				},
+				children: p
 			}),
 			a && /* @__PURE__ */ t("span", {
-				className: `shrink-0 inline-flex items-center justify-center ${s[r]}`,
+				style: {
+					display: "inline-flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: x,
+					height: x,
+					flexShrink: 0
+				},
 				children: a
 			})
 		]
@@ -124,14 +178,14 @@ function u({ variant: e = "primary", size: r = "medium", leftIcon: i, rightIcon:
 }
 //#endregion
 //#region src/components/Icon/Icon.tsx
-var d = {
+var u = {
 	outlined: "material-symbols-outlined",
 	rounded: "material-symbols-rounded",
 	sharp: "material-symbols-sharp"
 };
-function f({ name: e, size: n = 24, fill: r = 0, weight: i = 400, variant: a = "outlined", color: o = "currentColor", className: s }) {
+function d({ name: e, size: n = 24, fill: r = 0, weight: i = 400, variant: a = "outlined", color: o = "currentColor", className: s }) {
 	return /* @__PURE__ */ t("span", {
-		className: [d[a], s ?? ""].join(" ").trim(),
+		className: [u[a], s ?? ""].join(" ").trim(),
 		style: {
 			fontVariationSettings: `'opsz' ${n}, 'wght' ${i}, 'FILL' ${r}, 'GRAD' 0`,
 			fontSize: n,
@@ -148,7 +202,7 @@ function f({ name: e, size: n = 24, fill: r = 0, weight: i = 400, variant: a = "
 }
 //#endregion
 //#region src/components/TrainingCard/TrainingCard.tsx
-function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o, duration: s, music: c, spotsUsed: l, spotsTotal: d, onCheckin: p, onClick: m, className: h }) {
+function f({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o, duration: s, music: c, spotsUsed: u, spotsTotal: f, onCheckin: p, onClick: m, className: h }) {
 	return /* @__PURE__ */ n("div", {
 		className: ["flex items-stretch overflow-hidden cursor-pointer transition-opacity hover:opacity-95", h ?? ""].join(" "),
 		style: {
@@ -185,7 +239,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 							className: "flex items-center flex-wrap",
 							style: { gap: "var(--spacing-xsmall)" },
 							children: [
-								/* @__PURE__ */ t(f, {
+								/* @__PURE__ */ t(d, {
 									name: "sports_gymnastics",
 									size: 20,
 									weight: 300,
@@ -225,7 +279,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 								/* @__PURE__ */ n("div", {
 									className: "flex items-center",
 									style: { gap: "var(--spacing-small)" },
-									children: [/* @__PURE__ */ t(f, {
+									children: [/* @__PURE__ */ t(d, {
 										name: "calendar_today",
 										size: 20,
 										weight: 300,
@@ -241,7 +295,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 								/* @__PURE__ */ n("div", {
 									className: "flex items-center",
 									style: { gap: "var(--spacing-small)" },
-									children: [/* @__PURE__ */ t(f, {
+									children: [/* @__PURE__ */ t(d, {
 										name: "timer",
 										size: 20,
 										weight: 300,
@@ -257,7 +311,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 								c && /* @__PURE__ */ n("div", {
 									className: "flex items-center",
 									style: { gap: "var(--spacing-small)" },
-									children: [/* @__PURE__ */ t(f, {
+									children: [/* @__PURE__ */ t(d, {
 										name: "play_circle",
 										size: 20,
 										weight: 300,
@@ -277,7 +331,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 				/* @__PURE__ */ n("div", {
 					className: "flex flex-1 items-center",
 					style: { gap: "var(--spacing-medium)" },
-					children: [/* @__PURE__ */ t(f, {
+					children: [/* @__PURE__ */ t(d, {
 						name: "group",
 						size: 24,
 						weight: 300,
@@ -291,15 +345,15 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 							color: "var(--color-text-primary)"
 						},
 						children: [
-							l,
+							u,
 							"/",
-							d
+							f
 						]
 					})]
 				}),
 				/* @__PURE__ */ t("div", {
 					className: "flex items-center shrink-0",
-					children: /* @__PURE__ */ t(u, {
+					children: /* @__PURE__ */ t(l, {
 						size: "xlarge",
 						variant: "primary",
 						onClick: (e) => {
@@ -314,14 +368,14 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o
 }
 //#endregion
 //#region src/components/Chip/Chip.tsx
-function m(e) {
+function p(e) {
 	return e === "disabled" ? { borderColor: "var(--color-interaction-primary-disabled)" } : e === "selected" ? { borderColor: "var(--color-interaction-primary-enabled)" } : { borderColor: "var(--color-border-high)" };
 }
-function h(e) {
+function m(e) {
 	return e === "disabled" ? { color: "var(--color-text-disabled)" } : e === "selected" ? { color: "var(--color-text-branded)" } : { color: "var(--color-text-primary)" };
 }
-function g({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: a, rightIcon: o, className: s, style: c, children: l, disabled: u, ...d }) {
-	let f = r === "disabled" || u, p = e === "small", g = p ? "size-4" : "size-6", _ = i ? p ? "size-7" : "size-10" : p ? "h-7 px-2 gap-1" : "h-10 px-4 gap-1";
+function h({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: a, rightIcon: o, className: s, style: c, children: l, disabled: u, ...d }) {
+	let f = r === "disabled" || u, h = e === "small", g = h ? "size-4" : "size-6", _ = i ? h ? "size-7" : "size-10" : h ? "h-7 px-2 gap-1" : "h-10 px-4 gap-1";
 	function v(e) {
 		f || (e.currentTarget.style.background = "var(--color-base-lowest)");
 	}
@@ -339,13 +393,13 @@ function g({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: 
 		className: [
 			"inline-flex items-center justify-center font-[Archivo] border transition-colors select-none rounded-[var(--border-radius-action)]",
 			_,
-			p ? "text-sm font-medium" : "text-base font-semibold",
+			h ? "text-sm font-medium" : "text-base font-semibold",
 			f ? "cursor-not-allowed" : "cursor-pointer",
 			s ?? ""
 		].join(" "),
 		style: {
+			...p(r),
 			...m(r),
-			...h(r),
 			...c
 		},
 		onMouseEnter: v,
@@ -374,7 +428,7 @@ function g({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: 
 }
 //#endregion
 //#region src/components/Divider/Divider.tsx
-function _({ intensity: e = "normal", horizontalSpace: n = !1, verticalSpace: r = !1, className: i }) {
+function g({ intensity: e = "normal", horizontalSpace: n = !1, verticalSpace: r = !1, className: i }) {
 	let a = e === "high" ? "bg-[var(--color-border-high)] border border-[var(--color-border-high)]" : "bg-[var(--color-border-normal)]";
 	return r ? /* @__PURE__ */ t("div", {
 		className: ["flex flex-col items-start w-full py-[var(--spacing-small)]", i ?? ""].join(" "),
@@ -389,7 +443,7 @@ function _({ intensity: e = "normal", horizontalSpace: n = !1, verticalSpace: r 
 }
 //#endregion
 //#region src/components/InfoCard/InfoCard.tsx
-function v(e, t) {
+function _(e, t) {
 	let n = "flex items-start rounded-[12px]", r = t === "horizontal" ? "flex-row gap-3 p-4" : "flex-col gap-4 px-5 py-4";
 	switch (e) {
 		case "elevated": return `${n} ${r} bg-white shadow-[0px_2px_16px_0px_rgba(22,22,22,0.12)]`;
@@ -397,7 +451,7 @@ function v(e, t) {
 		case "filled": return `${n} ${r} bg-[var(--color-base-lowest)]`;
 	}
 }
-function y({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyebrow: o, title: s, description: c, caption: l, actions: u, className: d }) {
+function v({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyebrow: o, title: s, description: c, caption: l, actions: u, className: d }) {
 	let f = r === "horizontal", p = /* @__PURE__ */ n("div", {
 		className: ["flex flex-1 flex-col items-start min-w-0", f ? "pl-1" : ""].join(" "),
 		children: [
@@ -422,7 +476,7 @@ function y({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyeb
 		]
 	});
 	return /* @__PURE__ */ n("div", {
-		className: [v(i, r), d ?? ""].join(" "),
+		className: [_(i, r), d ?? ""].join(" "),
 		children: [a && /* @__PURE__ */ t("span", {
 			className: "size-6 shrink-0",
 			children: a
@@ -440,7 +494,7 @@ function y({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyeb
 }
 //#endregion
 //#region src/components/Link/Link.tsx
-var b = {
+var y = {
 	small: {
 		text: "text-xs",
 		icon: "size-5"
@@ -454,8 +508,8 @@ var b = {
 		icon: "size-6"
 	}
 };
-function x({ size: e = "small", weight: r = "semibold", leftIcon: i, rightIcon: a, className: o, style: s, children: c, ...l }) {
-	let { text: u, icon: d } = b[e], f = r === "semibold" ? "font-semibold" : "font-medium";
+function b({ size: e = "small", weight: r = "semibold", leftIcon: i, rightIcon: a, className: o, style: s, children: c, ...l }) {
+	let { text: u, icon: d } = y[e], f = r === "semibold" ? "font-semibold" : "font-medium";
 	function p(e) {
 		e.currentTarget.style.borderBottomColor = "currentColor";
 	}
@@ -496,7 +550,7 @@ function x({ size: e = "small", weight: r = "semibold", leftIcon: i, rightIcon: 
 }
 //#endregion
 //#region src/components/ListItem/ListItem.tsx
-function S({ size: e = "large", style: r = "plain", title: i, subtitle: a, tertiaryText: o, leftColumn: s, rightItems: c, divider: l = !1, className: u }) {
+function x({ size: e = "large", style: r = "plain", title: i, subtitle: a, tertiaryText: o, leftColumn: s, rightItems: c, divider: l = !1, className: u }) {
 	let d = e === "small", f = d ? "size-5" : "size-6", p = d ? "gap-[var(--spacing-medium)] p-[var(--spacing-medium)]" : e === "medium" ? "gap-[var(--spacing-large)] px-[var(--spacing-large)] py-[var(--spacing-medium)]" : "gap-[var(--spacing-large)] p-[var(--spacing-large)]", m = d ? "text-sm" : "text-base", h = d ? "text-xs" : "text-sm";
 	return /* @__PURE__ */ n("div", {
 		className: [
@@ -540,7 +594,7 @@ function S({ size: e = "large", style: r = "plain", title: i, subtitle: a, terti
 }
 //#endregion
 //#region src/components/PillButton/PillButton.tsx
-var C = {
+var S = {
 	small: {
 		base: "h-7 text-sm gap-1",
 		icon: "size-4",
@@ -552,10 +606,10 @@ var C = {
 		iconOnly: "size-10 p-2"
 	}
 };
-function w(e, t) {
+function C(e, t) {
 	return t ? e === "primary" ? "cursor-not-allowed" : "border border-[var(--color-border-normal)] cursor-not-allowed" : e === "secondary" ? "border border-[var(--color-border-high)] text-[var(--color-text-primary)]" : "";
 }
-function T(e, t) {
+function w(e, t) {
 	return t ? {
 		background: e === "primary" ? "var(--color-interaction-primary-disabled)" : void 0,
 		color: "var(--color-text-disabled)"
@@ -564,8 +618,8 @@ function T(e, t) {
 		color: "var(--color-text-contained)"
 	} : {};
 }
-function E({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftIcon: a, rightIcon: o, disabled: s = !1, className: c, style: l, children: u, ...d }) {
-	let f = C[r], p = e === "primary";
+function T({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftIcon: a, rightIcon: o, disabled: s = !1, className: c, style: l, children: u, ...d }) {
+	let f = S[r], p = e === "primary";
 	function m(e) {
 		!s && p && (e.currentTarget.style.background = "var(--color-interaction-primary-hover)");
 	}
@@ -583,11 +637,11 @@ function E({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftI
 		className: [
 			"inline-flex items-center justify-center font-semibold font-[Archivo] transition-colors select-none rounded-[var(--border-radius-action)]",
 			i ? f.iconOnly : `px-3 ${f.base}`,
-			w(e, !!s),
+			C(e, !!s),
 			c ?? ""
 		].join(" "),
 		style: {
-			...T(e, !!s),
+			...w(e, !!s),
 			...l
 		},
 		onMouseEnter: m,
@@ -616,7 +670,7 @@ function E({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftI
 }
 //#endregion
 //#region src/components/SectionHeader/SectionHeader.tsx
-function D({ level: e = "one", size: r = "default", title: i, subtitle: a, icon: o, actionLabel: s, onAction: c, className: l }) {
+function E({ level: e = "one", size: r = "default", title: i, subtitle: a, icon: o, actionLabel: s, onAction: c, className: l }) {
 	if (e === "two") {
 		let e = r === "small" ? "text-sm" : "text-base";
 		return /* @__PURE__ */ t("div", {
@@ -661,7 +715,7 @@ function D({ level: e = "one", size: r = "default", title: i, subtitle: a, icon:
 }
 //#endregion
 //#region src/components/Snackbar/Snackbar.tsx
-var O = {
+var D = {
 	default: {
 		bg: "bg-[var(--color-base-highest)]",
 		text: "text-[var(--color-text-inverted)]"
@@ -683,8 +737,8 @@ var O = {
 		text: "text-[var(--color-text-primary)]"
 	}
 };
-function k({ type: e = "default", message: r, icon: i, action: a, className: o }) {
-	let { bg: s, text: c } = O[e];
+function O({ type: e = "default", message: r, icon: i, action: a, className: o }) {
+	let { bg: s, text: c } = D[e];
 	return /* @__PURE__ */ n("div", {
 		className: [
 			"flex items-center gap-[var(--spacing-large)] p-[var(--spacing-large)] rounded-[var(--border-radius-xlarge)] min-h-14 w-full max-w-[600px]",
@@ -708,7 +762,7 @@ function k({ type: e = "default", message: r, icon: i, action: a, className: o }
 }
 //#endregion
 //#region src/components/Tag/Tag.tsx
-var A = {
+var k = {
 	default: {
 		bg: "var(--color-base-low)",
 		iconBg: "var(--color-base-low)",
@@ -735,8 +789,8 @@ var A = {
 		color: "var(--color-text-error)"
 	}
 };
-function j({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1, className: o, children: s }) {
-	let { bg: c, iconBg: l, color: u } = A[e], d = r === "small", f = d ? "h-5" : "h-6", p = d ? "px-0.5" : "px-1", m = d ? "p-0.5" : "p-1";
+function A({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1, className: o, children: s }) {
+	let { bg: c, iconBg: l, color: u } = k[e], d = r === "small", f = d ? "h-5" : "h-6", p = d ? "px-0.5" : "px-1", m = d ? "p-0.5" : "p-1";
 	return a && i ? /* @__PURE__ */ t("div", {
 		className: ["inline-flex items-center justify-center rounded-[var(--border-radius-small)]", o ?? ""].join(" "),
 		style: { background: c },
@@ -770,7 +824,7 @@ function j({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1
 }
 //#endregion
 //#region src/assets/logos/KardiaIsotipo.tsx
-function M({ size: e, width: r, height: i, ...a }) {
+function j({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 177.96 202.2",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -788,7 +842,7 @@ function M({ size: e, width: r, height: i, ...a }) {
 }
 //#endregion
 //#region src/assets/logos/KardiaImagotipo.tsx
-function N({ size: e, width: r, height: i, ...a }) {
+function M({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 1031.57 154.37",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -827,4 +881,4 @@ function N({ size: e, width: r, height: i, ...a }) {
 	});
 }
 //#endregion
-export { a as Alert, u as Button, g as Chip, _ as Divider, f as Icon, y as InfoCard, N as KardiaImagotipo, M as KardiaIsotipo, x as Link, S as ListItem, E as PillButton, D as SectionHeader, k as Snackbar, j as Tag, p as TrainingCard };
+export { a as Alert, l as Button, h as Chip, g as Divider, d as Icon, v as InfoCard, M as KardiaImagotipo, j as KardiaIsotipo, b as Link, x as ListItem, T as PillButton, E as SectionHeader, O as Snackbar, A as Tag, f as TrainingCard };

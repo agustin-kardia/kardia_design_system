@@ -1,0 +1,57 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: var(--border-radius-small);
+  box-sizing: border-box;
+}
+
+/* Sizes */
+.regular { height: 24px; padding: 0 4px; }
+.small   { height: 20px; padding: 0 2px; }
+
+/* Types */
+.default { background: var(--color-base-low);              color: var(--color-text-primary); }
+.branded { background: var(--color-feedback-branded-light); color: var(--color-text-branded); }
+.info    { background: var(--color-feedback-info-light);    color: var(--color-text-information); }
+.success { background: var(--color-feedback-success-light); color: var(--color-text-success); }
+.failure { background: var(--color-feedback-error-light);   color: var(--color-text-error); }
+
+.iconSlot {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Icon-only wrapper */
+.iconOnlyRoot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-small);
+}
+.iconOnlyInner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-small);
+}
+.regularIconPadding { padding: 4px; }
+.smallIconPadding   { padding: 2px; }

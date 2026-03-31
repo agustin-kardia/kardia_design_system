@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Tag.module.css';
 
 export type TagType = 'default' | 'branded' | 'info' | 'success' | 'failure';
 export type TagSize = 'small' | 'regular';
@@ -12,34 +13,6 @@ export interface TagProps {
   children?: React.ReactNode;
 }
 
-const typeTokens: Record<TagType, { bg: string; iconBg: string; color: string }> = {
-  default: {
-    bg:     'var(--color-base-low)',
-    iconBg: 'var(--color-base-low)',
-    color:  'var(--color-text-primary)',
-  },
-  branded: {
-    bg:     'var(--color-feedback-branded-light)',
-    iconBg: 'var(--color-feedback-branded-light)',
-    color:  'var(--color-text-branded)',
-  },
-  info: {
-    bg:     'var(--color-feedback-info-light)',
-    iconBg: 'var(--color-feedback-info-light)',
-    color:  'var(--color-text-information)',
-  },
-  success: {
-    bg:     'var(--color-feedback-success-light)',
-    iconBg: 'var(--color-feedback-success-light)',
-    color:  'var(--color-text-success)',
-  },
-  failure: {
-    bg:     'var(--color-feedback-error-light)',
-    iconBg: 'var(--color-feedback-error-light)',
-    color:  'var(--color-text-error)',
-  },
-};
-
 export function Tag({
   type = 'default',
   size = 'regular',
@@ -48,23 +21,16 @@ export function Tag({
   className,
   children,
 }: TagProps) {
-  const { bg, iconBg, color } = typeTokens[type];
-  const isSmall = size === 'small';
-  const height = isSmall ? 'h-5' : 'h-6';
-  const outerPx = isSmall ? 'px-0.5' : 'px-1';
-  const iconPadding = isSmall ? 'p-0.5' : 'p-1';
+  const sizeClass = size === 'small' ? styles.small : styles.regular;
+  const iconPaddingClass = size === 'small' ? styles.smallIconPadding : styles.regularIconPadding;
 
   if (iconOnly && icon) {
     return (
       <div
-        className={['inline-flex items-center justify-center rounded-[var(--border-radius-small)]', className ?? ''].join(' ')}
-        style={{ background: bg }}
+        className={[styles.iconOnlyRoot, styles[type], className ?? ''].filter(Boolean).join(' ')}
       >
-        <span
-          className={['inline-flex items-center justify-center rounded-[var(--border-radius-small)]', iconPadding].join(' ')}
-          style={{ background: iconBg }}
-        >
-          <span className="size-4 inline-flex items-center justify-center shrink-0">{icon}</span>
+        <span className={[styles.iconOnlyInner, styles[type], iconPaddingClass].join(' ')}>
+          <span className={styles.iconSlot}>{icon}</span>
         </span>
       </div>
     );
@@ -73,19 +39,14 @@ export function Tag({
   return (
     <div
       className={[
-        'inline-flex items-center gap-0.5 rounded-[var(--border-radius-small)]',
-        height,
-        outerPx,
+        styles.root,
+        sizeClass,
+        styles[type],
         className ?? '',
-      ].join(' ')}
-      style={{ background: bg, color }}
+      ].filter(Boolean).join(' ')}
     >
-      {icon && (
-        <span className="size-4 inline-flex items-center justify-center shrink-0">{icon}</span>
-      )}
-      <span className="inline-flex items-center justify-center px-1 font-[Archivo] font-medium text-[10px] leading-[1.5] overflow-hidden text-ellipsis whitespace-nowrap">
-        {children}
-      </span>
+      {icon && <span className={styles.iconSlot}>{icon}</span>}
+      <span className={styles.label}>{children}</span>
     </div>
   );
 }

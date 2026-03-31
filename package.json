@@ -9,12 +9,14 @@
   "main": "./dist/kardia-ds.umd.js",
   "module": "./dist/kardia-ds.es.js",
   "types": "./dist/types/index.d.ts",
+  "style": "./dist/kardia-ds.css",
   "exports": {
     ".": {
       "import": "./dist/kardia-ds.es.js",
       "require": "./dist/kardia-ds.umd.js",
       "types": "./dist/types/index.d.ts"
     },
+    "./styles": "./dist/kardia-ds.css",
     "./dist/css/variables.css": "./dist/css/variables.css"
   },
   "scripts": {

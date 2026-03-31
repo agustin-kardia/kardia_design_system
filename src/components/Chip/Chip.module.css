@@ -1,0 +1,38 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Archivo, sans-serif;
+  border: 1px solid;
+  user-select: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: var(--border-radius-action);
+  transition: background 0.15s, opacity 0.15s;
+}
+.root:focus-visible { outline: 2px solid var(--color-brand-primary); outline-offset: 2px; }
+.root:disabled { cursor: not-allowed; }
+
+/* Sizes */
+.small  { height: 28px; padding: 0 8px;  gap: 4px;  font-size: 14px; font-weight: 500; }
+.medium { height: 40px; padding: 0 16px; gap: 4px;  font-size: 16px; font-weight: 600; }
+
+/* Icon-only sizes */
+.smallIconOnly  { width: 28px; height: 28px; padding: 0; }
+.mediumIconOnly { width: 40px; height: 40px; padding: 0; }
+
+/* States */
+.idle     { border-color: var(--color-border-high);                  color: var(--color-text-primary); }
+.selected { border-color: var(--color-interaction-primary-enabled);  color: var(--color-text-branded); }
+.disabled { border-color: var(--color-interaction-primary-disabled); color: var(--color-text-disabled); }
+
+.idle:hover:not(:disabled)     { background: var(--color-base-lowest); }
+.idle:active:not(:disabled)    { opacity: 0.75; }
+.selected:hover:not(:disabled) { background: var(--color-base-lowest); }
+.selected:active:not(:disabled){ opacity: 0.75; }
+
+/* Icon slot sizes */
+.iconSm { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.iconMd { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+.label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

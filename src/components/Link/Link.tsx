@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Link.module.css';
 
 export type LinkSize = 'small' | 'medium' | 'large';
 export type LinkWeight = 'semibold' | 'medium';
@@ -11,10 +12,15 @@ export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement>
   children: React.ReactNode;
 }
 
-const sizeStyles: Record<LinkSize, { text: string; icon: string }> = {
-  small:  { text: 'text-xs',  icon: 'size-5' },
-  medium: { text: 'text-sm',  icon: 'size-5' },
-  large:  { text: 'text-base', icon: 'size-6' },
+const iconClass: Record<LinkSize, string> = {
+  small:  styles.iconSm,
+  medium: styles.iconSm,
+  large:  styles.iconLg,
+};
+
+const weightClass: Record<LinkWeight, string> = {
+  semibold: styles.semibold,
+  medium:   styles.medium_weight,
 };
 
 export function Link({
@@ -27,40 +33,20 @@ export function Link({
   children,
   ...props
 }: LinkProps) {
-  const { text, icon } = sizeStyles[size];
-  const fontWeight = weight === 'semibold' ? 'font-semibold' : 'font-medium';
-
-  function handleMouseEnter(e: React.MouseEvent<HTMLAnchorElement>) {
-    (e.currentTarget as HTMLElement).style.borderBottomColor = 'currentColor';
-  }
-  function handleMouseLeave(e: React.MouseEvent<HTMLAnchorElement>) {
-    (e.currentTarget as HTMLElement).style.borderBottomColor = 'transparent';
-  }
-  function handleMouseDown(e: React.MouseEvent<HTMLAnchorElement>) {
-    (e.currentTarget as HTMLElement).style.opacity = '0.75';
-  }
-  function handleMouseUp(e: React.MouseEvent<HTMLAnchorElement>) {
-    (e.currentTarget as HTMLElement).style.opacity = '';
-  }
-
   return (
     <a
       className={[
-        'inline-flex items-center gap-1 font-[Archivo] text-[var(--color-text-branded)] border-b border-transparent transition-colors select-none',
-        text,
-        fontWeight,
+        styles.root,
+        styles[size],
+        weightClass[weight],
         className ?? '',
-      ].join(' ')}
+      ].filter(Boolean).join(' ')}
       style={style}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
       {...props}
     >
-      {leftIcon && <span className={`shrink-0 inline-flex items-center justify-center ${icon}`}>{leftIcon}</span>}
+      {leftIcon && <span className={iconClass[size]}>{leftIcon}</span>}
       <span>{children}</span>
-      {rightIcon && <span className={`shrink-0 inline-flex items-center justify-center ${icon}`}>{rightIcon}</span>}
+      {rightIcon && <span className={iconClass[size]}>{rightIcon}</span>}
     </a>
   );
 }

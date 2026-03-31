@@ -7,4 +7,4 @@ export interface SnackbarProps {
     action?: React.ReactNode;
     className?: string;
 }
-export declare function Snackbar({ type, message, icon, action, className, }: SnackbarProps): import("react/jsx-runtime").JSX.Element;
+export declare function Snackbar({ type, message, icon, action, className }: SnackbarProps): import("react/jsx-runtime").JSX.Element;

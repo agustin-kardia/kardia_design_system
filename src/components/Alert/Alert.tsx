@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Alert.module.css';
 
 export type AlertType = 'neutral' | 'info' | 'success' | 'warning' | 'critical';
 
@@ -11,20 +12,12 @@ export interface AlertProps {
   className?: string;
 }
 
-const typeBg: Record<AlertType, string> = {
-  neutral:  'var(--color-base-low)',
-  info:     'var(--color-feedback-info-light)',
-  success:  'var(--color-feedback-success-light)',
-  warning:  'var(--color-feedback-warning-light)',
-  critical: 'var(--color-feedback-branded-light)',
-};
-
-const typeTextColor: Record<AlertType, string> = {
-  neutral:  'var(--color-text-primary)',
-  info:     '#00496b',
-  success:  '#004f21',
-  warning:  '#864611',
-  critical: '#710020',
+const colorClass: Record<AlertType, string> = {
+  neutral:  styles.colorNeutral,
+  info:     styles.colorInfo,
+  success:  styles.colorSuccess,
+  warning:  styles.colorWarning,
+  critical: styles.colorCritical,
 };
 
 export function Alert({
@@ -37,24 +30,15 @@ export function Alert({
 }: AlertProps) {
   return (
     <div
-      className={['flex flex-row items-start gap-4 p-[var(--spacing-large)] rounded-[var(--border-radius-xlarge)]', className ?? ''].join(' ')}
-      style={{ background: typeBg[type] }}
+      className={[styles.root, styles[type], className ?? ''].filter(Boolean).join(' ')}
     >
-      {icon && (
-        <span className="shrink-0 inline-flex items-center justify-center size-6">
-          {icon}
-        </span>
-      )}
-      <div className="flex flex-col flex-1 gap-2 min-w-0" style={{ color: typeTextColor[type] }}>
-        <div className="flex flex-col gap-1 leading-[1.5] w-full">
-          <p className="font-[Archivo] font-semibold text-base w-full">{title}</p>
-          {subtitle && (
-            <p className="font-[Archivo] font-medium text-sm w-full">{subtitle}</p>
-          )}
+      {icon && <span className={styles.iconSlot}>{icon}</span>}
+      <div className={[styles.body, colorClass[type]].join(' ')}>
+        <div className={styles.textGroup}>
+          <p className={styles.titleText}>{title}</p>
+          {subtitle && <p className={styles.subtitleText}>{subtitle}</p>}
         </div>
-        {actions && (
-          <div className="flex items-start">{actions}</div>
-        )}
+        {actions && <div className={styles.actions}>{actions}</div>}
       </div>
     </div>
   );

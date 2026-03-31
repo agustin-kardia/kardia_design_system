@@ -1,0 +1,27 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: Archivo, sans-serif;
+  color: var(--color-text-branded);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s, opacity 0.15s;
+  user-select: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.root:hover  { border-bottom-color: currentColor; }
+.root:active { opacity: 0.75; }
+
+/* Sizes */
+.small  { font-size: 12px; }
+.medium { font-size: 14px; }
+.large  { font-size: 16px; }
+
+/* Weights */
+.semibold { font-weight: 600; }
+.medium_weight  { font-weight: 500; }
+
+/* Icon slots */
+.iconSm { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.iconLg { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }

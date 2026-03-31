@@ -1,3 +1,4 @@
+import styles from './Icon.module.css';
 
 export type IconSize = 16 | 20 | 24;
 export type IconFill = 0 | 1;
@@ -32,17 +33,11 @@ export function Icon({
 }: IconProps) {
   return (
     <span
-      className={[variantClass[variant], className ?? ''].join(' ').trim()}
+      className={[styles.root, variantClass[variant], className ?? ''].filter(Boolean).join(' ')}
       style={{
         fontVariationSettings: `'opsz' ${size}, 'wght' ${weight}, 'FILL' ${fill}, 'GRAD' 0`,
         fontSize: size,
-        lineHeight: 1,
         color,
-        userSelect: 'none',
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
       }}
     >
       {name}

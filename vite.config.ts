@@ -7,9 +7,14 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  // In dev mode, serve the docs. In build mode, compile the component library.
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]___[hash:5]',
+    },
+  },
   build: command === 'build'
     ? {
+        cssCodeSplit: false,
         lib: {
           entry: resolve(__dirname, 'src/index.ts'),
           name: 'KardiaDS',
@@ -22,6 +27,10 @@ export default defineConfig(({ command }) => ({
               react: 'React',
               'react-dom': 'ReactDOM',
               'react/jsx-runtime': 'jsxRuntime',
+            },
+            assetFileNames: (assetInfo) => {
+              if (assetInfo.name?.endsWith('.css')) return 'kardia-ds.css';
+              return assetInfo.name ?? '[name][extname]';
             },
           },
         },

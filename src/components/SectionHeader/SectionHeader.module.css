@@ -1,0 +1,89 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large);
+  padding-bottom: var(--spacing-medium);
+  width: 100%;
+}
+
+/* Level two */
+.levelTwo {
+  display: flex;
+  align-items: start;
+  padding-bottom: var(--spacing-medium);
+  width: 100%;
+}
+.levelTwoTitle {
+  flex: 1;
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.levelTwoDefault { font-size: 16px; }
+.levelTwoSmall   { font-size: 14px; }
+
+/* Level one main content */
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  align-items: start;
+  min-width: 0;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  width: 100%;
+}
+.titleRowDefault { align-items: start; }
+.titleRowSmall   { align-items: center; }
+
+.iconSlotDefault { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.iconSlotSmall   { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+.title {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.titleDefault { font-size: 20px; }
+.titleSmall   { font-size: 16px; }
+
+.subtitle {
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  width: 100%;
+  line-height: 1.5;
+}
+
+/* Action button */
+.action {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.action:hover { text-decoration: underline; }
+
+.actionTextDefault { font-size: 14px; }
+.actionTextSmall   { font-size: 12px; }
+
+.actionIconDefault { width: 20px; height: 20px; flex-shrink: 0; }
+.actionIconSmall   { width: 16px; height: 16px; flex-shrink: 0; }

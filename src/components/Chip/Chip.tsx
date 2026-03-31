@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Chip.module.css';
 
 export type ChipSize = 'small' | 'medium';
 export type ChipState = 'idle' | 'selected' | 'disabled';
@@ -12,17 +13,20 @@ export interface ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
   children?: React.ReactNode;
 }
 
-function getBorderStyle(state: ChipState): React.CSSProperties {
-  if (state === 'disabled') return { borderColor: 'var(--color-interaction-primary-disabled)' };
-  if (state === 'selected') return { borderColor: 'var(--color-interaction-primary-enabled)' };
-  return { borderColor: 'var(--color-border-high)' };
-}
+const iconClass: Record<ChipSize, string> = {
+  small:  styles.iconSm,
+  medium: styles.iconMd,
+};
 
-function getTextStyle(state: ChipState): React.CSSProperties {
-  if (state === 'disabled') return { color: 'var(--color-text-disabled)' };
-  if (state === 'selected') return { color: 'var(--color-text-branded)' };
-  return { color: 'var(--color-text-primary)' };
-}
+const sizeClass: Record<ChipSize, string> = {
+  small:  styles.small,
+  medium: styles.medium,
+};
+
+const iconOnlySizeClass: Record<ChipSize, string> = {
+  small:  styles.smallIconOnly,
+  medium: styles.mediumIconOnly,
+};
 
 export function Chip({
   size = 'medium',
@@ -37,57 +41,29 @@ export function Chip({
   ...props
 }: ChipProps) {
   const isDisabled = state === 'disabled' || disabled;
-  const isSmall = size === 'small';
-  const iconSize = isSmall ? 'size-4' : 'size-6';
-
-  const sizeClasses = iconOnly
-    ? isSmall ? 'size-7' : 'size-10'
-    : isSmall ? 'h-7 px-2 gap-1' : 'h-10 px-4 gap-1';
-
-  function handleMouseEnter(e: React.MouseEvent<HTMLButtonElement>) {
-    if (isDisabled) return;
-    (e.currentTarget as HTMLElement).style.background = 'var(--color-base-lowest)';
-  }
-  function handleMouseLeave(e: React.MouseEvent<HTMLButtonElement>) {
-    if (isDisabled) return;
-    (e.currentTarget as HTMLElement).style.background = '';
-  }
-  function handleMouseDown(e: React.MouseEvent<HTMLButtonElement>) {
-    if (isDisabled) return;
-    (e.currentTarget as HTMLElement).style.opacity = '0.75';
-  }
-  function handleMouseUp(e: React.MouseEvent<HTMLButtonElement>) {
-    if (isDisabled) return;
-    (e.currentTarget as HTMLElement).style.opacity = '';
-  }
 
   return (
     <button
       disabled={isDisabled}
       className={[
-        'inline-flex items-center justify-center font-[Archivo] border transition-colors select-none rounded-[var(--border-radius-action)]',
-        sizeClasses,
-        isSmall ? 'text-sm font-medium' : 'text-base font-semibold',
-        isDisabled ? 'cursor-not-allowed' : 'cursor-pointer',
+        styles.root,
+        iconOnly ? iconOnlySizeClass[size] : sizeClass[size],
+        styles[state],
         className ?? '',
-      ].join(' ')}
-      style={{ ...getBorderStyle(state), ...getTextStyle(state), ...style }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
+      ].filter(Boolean).join(' ')}
+      style={style}
       {...props}
     >
       {!iconOnly && leftIcon && (
-        <span className={`shrink-0 inline-flex items-center justify-center ${iconSize}`}>{leftIcon}</span>
+        <span className={iconClass[size]}>{leftIcon}</span>
       )}
       {iconOnly ? (
-        <span className={`shrink-0 inline-flex items-center justify-center ${iconSize}`}>{leftIcon ?? children}</span>
+        <span className={iconClass[size]}>{leftIcon ?? children}</span>
       ) : (
-        <span className="truncate">{children}</span>
+        <span className={styles.label}>{children}</span>
       )}
       {!iconOnly && rightIcon && (
-        <span className={`shrink-0 inline-flex items-center justify-center ${iconSize}`}>{rightIcon}</span>
+        <span className={iconClass[size]}>{rightIcon}</span>
       )}
     </button>
   );

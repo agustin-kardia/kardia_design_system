@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './InfoCard.module.css';
 
 export type InfoCardOrientation = 'horizontal' | 'vertical';
 export type InfoCardStyle = 'elevated' | 'outlined' | 'filled';
@@ -15,20 +16,6 @@ export interface InfoCardProps {
   className?: string;
 }
 
-function getContainerStyles(style: InfoCardStyle, orientation: InfoCardOrientation): string {
-  const base = 'flex items-start rounded-[12px]';
-  const layout = orientation === 'horizontal' ? 'flex-row gap-3 p-4' : 'flex-col gap-4 px-5 py-4';
-
-  switch (style) {
-    case 'elevated':
-      return `${base} ${layout} bg-white shadow-[0px_2px_16px_0px_rgba(22,22,22,0.12)]`;
-    case 'outlined':
-      return `${base} ${layout} border border-[var(--color-border-high)]`;
-    case 'filled':
-      return `${base} ${layout} bg-[var(--color-base-lowest)]`;
-  }
-}
-
 export function InfoCard({
   orientation = 'horizontal',
   style = 'outlined',
@@ -43,50 +30,35 @@ export function InfoCard({
   const isHorizontal = orientation === 'horizontal';
 
   const content = (
-    <div className={['flex flex-1 flex-col items-start min-w-0', isHorizontal ? 'pl-1' : ''].join(' ')}>
-      {eyebrow && (
-        <p className="font-[Archivo] font-semibold text-xs text-[var(--color-text-branded)] leading-[1.5]">
-          {eyebrow}
-        </p>
-      )}
-      <div className="flex flex-col gap-0.5 items-start pb-1 w-full">
-        <p className="font-[Archivo] font-semibold text-xl text-[var(--color-text-primary)] leading-[1.5] w-full">
-          {title}
-        </p>
-        {description && (
-          <p className="font-[Archivo] font-medium text-base text-[var(--color-text-secondary)] leading-[1.5] w-full">
-            {description}
-          </p>
-        )}
+    <div className={[styles.contentCol, isHorizontal ? styles.contentColHorizontal : ''].filter(Boolean).join(' ')}>
+      {eyebrow && <p className={styles.eyebrow}>{eyebrow}</p>}
+      <div className={styles.titleGroup}>
+        <p className={styles.title}>{title}</p>
+        {description && <p className={styles.description}>{description}</p>}
       </div>
-      {caption && (
-        <p className="font-[Archivo] font-medium text-xs text-[var(--color-text-disabled)] leading-[1.5] whitespace-nowrap pt-1">
-          {caption}
-        </p>
-      )}
+      {caption && <p className={styles.caption}>{caption}</p>}
     </div>
   );
 
   return (
-    <div className={[getContainerStyles(style, orientation), className ?? ''].join(' ')}>
-      {icon && <span className="size-6 shrink-0">{icon}</span>}
+    <div
+      className={[
+        styles.root,
+        styles[orientation],
+        styles[style],
+        className ?? '',
+      ].filter(Boolean).join(' ')}
+    >
+      {icon && <span className={styles.iconSlot}>{icon}</span>}
       {isHorizontal ? (
         <>
           {content}
-          {actions && (
-            <div className="flex gap-3 items-start self-stretch shrink-0">
-              {actions}
-            </div>
-          )}
+          {actions && <div className={styles.actionsH}>{actions}</div>}
         </>
       ) : (
-        <div className="flex gap-4 items-start w-full">
+        <div className={styles.verticalRow}>
           {content}
-          {actions && (
-            <div className="flex gap-3 items-start shrink-0">
-              {actions}
-            </div>
-          )}
+          {actions && <div className={styles.actionsV}>{actions}</div>}
         </div>
       )}
     </div>

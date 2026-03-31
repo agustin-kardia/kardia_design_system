@@ -1,0 +1,112 @@
+.root {
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  border-radius: var(--border-radius-3xlarge);
+  background: var(--color-base-lowest);
+}
+.root:hover { opacity: 0.95; }
+
+.image {
+  flex-shrink: 0;
+  overflow: hidden;
+  width: 200px;
+  min-height: 200px;
+}
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--spacing-3xlarge);
+  padding: var(--spacing-2xlarge) var(--spacing-8xlarge) var(--spacing-2xlarge) var(--spacing-3xlarge);
+  box-sizing: border-box;
+}
+
+.left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.typeRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+.typeName {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-branded);
+}
+.specialTag {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-branded);
+  background: color-mix(in srgb, var(--color-brand-primary) 20%, transparent);
+  border-radius: var(--border-radius-action);
+  padding: 2px var(--spacing-small);
+}
+
+.coachName {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: var(--typography-h4-600-font-size);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+.infoText {
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}
+
+.spots {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--spacing-medium);
+}
+.spotsCount {
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: var(--typography-h3-500-font-size);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.checkin {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}

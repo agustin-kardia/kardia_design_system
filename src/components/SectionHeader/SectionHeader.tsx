@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './SectionHeader.module.css';
 
 export type SectionHeaderLevel = 'one' | 'two';
 export type SectionHeaderSize = 'default' | 'small';
@@ -25,45 +26,36 @@ export function SectionHeader({
   className,
 }: SectionHeaderProps) {
   if (level === 'two') {
-    const textSize = size === 'small' ? 'text-sm' : 'text-base';
     return (
-      <div className={['flex items-start pb-[var(--spacing-medium)] w-full', className ?? ''].join(' ')}>
-        <p className={['flex-1 font-[Archivo] font-semibold text-[var(--color-text-secondary)] overflow-hidden text-ellipsis whitespace-nowrap', textSize].join(' ')}>
+      <div className={[styles.levelTwo, className ?? ''].filter(Boolean).join(' ')}>
+        <p className={[styles.levelTwoTitle, size === 'small' ? styles.levelTwoSmall : styles.levelTwoDefault].join(' ')}>
           {title}
         </p>
       </div>
     );
   }
 
-  // Level one
   const isDefault = size === 'default';
-  const titleSize = isDefault ? 'text-xl' : 'text-base';
-  const iconSize = isDefault ? 'size-6' : 'size-5';
-  const actionTextSize = isDefault ? 'text-sm' : 'text-xs';
-  const actionIconSize = isDefault ? 'size-5' : 'size-4';
 
   return (
-    <div className={['flex items-center gap-[var(--spacing-large)] pb-[var(--spacing-medium)] w-full', className ?? ''].join(' ')}>
-      <div className="flex flex-1 flex-col gap-1 items-start min-w-0">
-        <div className={['flex items-center gap-[var(--spacing-small)] w-full', isDefault ? 'items-start' : 'items-center'].join(' ')}>
-          {icon && <span className={`shrink-0 inline-flex items-center justify-center ${iconSize}`}>{icon}</span>}
-          <p className={['font-[Archivo] font-semibold text-[var(--color-text-primary)] overflow-hidden text-ellipsis whitespace-nowrap', titleSize].join(' ')}>
+    <div className={[styles.root, className ?? ''].filter(Boolean).join(' ')}>
+      <div className={styles.content}>
+        <div className={[styles.titleRow, isDefault ? styles.titleRowDefault : styles.titleRowSmall].join(' ')}>
+          {icon && (
+            <span className={isDefault ? styles.iconSlotDefault : styles.iconSlotSmall}>{icon}</span>
+          )}
+          <p className={[styles.title, isDefault ? styles.titleDefault : styles.titleSmall].join(' ')}>
             {title}
           </p>
         </div>
         {isDefault && subtitle && (
-          <p className="font-[Archivo] font-medium text-sm text-[var(--color-text-secondary)] w-full leading-[1.5]">
-            {subtitle}
-          </p>
+          <p className={styles.subtitle}>{subtitle}</p>
         )}
       </div>
       {actionLabel && onAction && (
-        <button
-          onClick={onAction}
-          className="inline-flex items-center shrink-0 font-[Archivo] font-semibold text-[var(--color-text-primary)] hover:underline"
-        >
-          <span className={actionTextSize}>{actionLabel}</span>
-          <span className={`shrink-0 ${actionIconSize}`} aria-hidden>›</span>
+        <button className={styles.action} onClick={onAction}>
+          <span className={isDefault ? styles.actionTextDefault : styles.actionTextSmall}>{actionLabel}</span>
+          <span className={isDefault ? styles.actionIconDefault : styles.actionIconSmall} aria-hidden>›</span>
         </button>
       )}
     </div>

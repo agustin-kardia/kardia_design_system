@@ -1,0 +1,30 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-xlarge);
+  min-height: 56px;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+.default { background: var(--color-base-highest); }
+.branded { background: var(--color-base-branded); }
+.error   { background: var(--color-feedback-error); }
+.success { background: var(--color-feedback-success); }
+.warning { background: var(--color-feedback-warning); }
+
+.body { display: flex; flex: 1; gap: var(--spacing-large); align-items: center; min-width: 0; }
+.icon { flex-shrink: 0; width: 24px; height: 24px; }
+.message {
+  flex: 1;
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.textInverted  { color: var(--color-text-inverted); }
+.textContained { color: var(--color-text-contained); }
+.textPrimary   { color: var(--color-text-primary); }
+.action { display: flex; align-items: flex-start; flex-shrink: 0; }

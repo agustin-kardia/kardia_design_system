@@ -11,6 +11,7 @@ import { InfoCard } from '../../components/InfoCard/InfoCard';
 import { Alert } from '../../components/Alert/Alert';
 import { Snackbar } from '../../components/Snackbar/Snackbar';
 import { Icon } from '../../components/Icon/Icon';
+import { TrainingCard } from '../../components/TrainingCard/TrainingCard';
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
@@ -365,6 +366,27 @@ export default function ComponentsPage() {
           <Snackbar type="warning" message="Warning message"
             icon={<Icon name="warning" size={24} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />}
             action={<Link href="#" size="small" className="!text-[var(--color-text-primary)]">Action</Link>} />
+        </div>
+      </ComponentDoc>
+
+      {/* ── TrainingCard ── */}
+      <ComponentDoc
+        name="TrainingCard"
+        status="done"
+        description="Session listing card for the facility check-in screen. Shows coach, session type, date, duration, music, spots, and a check-in button."
+        props={['coachImage?', 'coachName', 'sessionType', 'specialTag?', 'date', 'duration', 'music?', 'spotsUsed', 'spotsTotal', 'onCheckin?', 'onClick?']}
+      >
+        <div className="w-full">
+          <TrainingCard
+            coachName="Valeria González"
+            sessionType="Cardio & Strength"
+            specialTag="Special"
+            date="Martes 11/08, 10:30 am"
+            duration="45 minutos"
+            music="Dance & Pop"
+            spotsUsed={20}
+            spotsTotal={25}
+          />
         </div>
       </ComponentDoc>
 

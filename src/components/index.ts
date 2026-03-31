@@ -1,4 +1,5 @@
 export * from './Alert/Alert';
+export * from './TrainingCard/TrainingCard';
 export * from './Button/Button';
 export * from './Icon/Icon';
 export * from './Chip/Chip';

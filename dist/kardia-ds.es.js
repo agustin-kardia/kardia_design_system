@@ -146,15 +146,189 @@ function f({ name: e, size: n = 24, fill: r = 0, weight: i = 400, variant: a = "
 	});
 }
 //#endregion
+//#region src/components/TrainingCard/TrainingCard.tsx
+function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: o, duration: s, music: c, spotsUsed: l, spotsTotal: d, onCheckin: p, onClick: m, className: h }) {
+	return /* @__PURE__ */ n("div", {
+		className: ["flex items-stretch overflow-hidden cursor-pointer transition-opacity hover:opacity-95", h ?? ""].join(" "),
+		style: {
+			background: "var(--color-base-lowest)",
+			borderRadius: "var(--border-radius-3xlarge)"
+		},
+		onClick: m,
+		children: [/* @__PURE__ */ t("div", {
+			className: "shrink-0 overflow-hidden",
+			style: {
+				width: 200,
+				minHeight: 200
+			},
+			children: /* @__PURE__ */ t("img", {
+				src: e || "https://placehold.co/200x200/2A2A2A/fff?text=Coach",
+				alt: r,
+				className: "w-full h-full object-cover"
+			})
+		}), /* @__PURE__ */ n("div", {
+			className: "flex flex-1 items-center",
+			style: {
+				gap: "var(--spacing-3xlarge)",
+				paddingTop: "var(--spacing-2xlarge)",
+				paddingBottom: "var(--spacing-2xlarge)",
+				paddingLeft: "var(--spacing-3xlarge)",
+				paddingRight: "var(--spacing-8xlarge)"
+			},
+			children: [
+				/* @__PURE__ */ n("div", {
+					className: "flex flex-1 flex-col",
+					style: { gap: "var(--spacing-small)" },
+					children: [
+						/* @__PURE__ */ n("div", {
+							className: "flex items-center flex-wrap",
+							style: { gap: "var(--spacing-xsmall)" },
+							children: [
+								/* @__PURE__ */ t(f, {
+									name: "sports_gymnastics",
+									size: 20,
+									weight: 300,
+									variant: "rounded",
+									fill: 0,
+									color: "var(--color-text-branded)"
+								}),
+								/* @__PURE__ */ t("span", {
+									className: "font-[Archivo] font-semibold text-sm leading-[1.5]",
+									style: { color: "var(--color-text-branded)" },
+									children: i
+								}),
+								a && /* @__PURE__ */ t("span", {
+									className: "font-[Archivo] font-semibold text-xs leading-[1.5]",
+									style: {
+										color: "var(--color-text-branded)",
+										background: "color-mix(in srgb, var(--color-brand-primary) 20%, transparent)",
+										borderRadius: "var(--border-radius-action)",
+										padding: "2px var(--spacing-small)"
+									},
+									children: a
+								})
+							]
+						}),
+						/* @__PURE__ */ t("p", {
+							className: "font-[Archivo] font-semibold leading-[1.25]",
+							style: {
+								fontSize: "var(--typography-h4-600-font-size)",
+								color: "var(--color-text-primary)"
+							},
+							children: r
+						}),
+						/* @__PURE__ */ n("div", {
+							className: "flex flex-col",
+							style: { gap: "var(--spacing-small)" },
+							children: [
+								/* @__PURE__ */ n("div", {
+									className: "flex items-center",
+									style: { gap: "var(--spacing-small)" },
+									children: [/* @__PURE__ */ t(f, {
+										name: "calendar_today",
+										size: 20,
+										weight: 300,
+										variant: "rounded",
+										fill: 0,
+										color: "var(--color-icon-secondary)"
+									}), /* @__PURE__ */ t("span", {
+										className: "font-[Archivo] font-medium text-sm leading-[1.5]",
+										style: { color: "var(--color-text-primary)" },
+										children: o
+									})]
+								}),
+								/* @__PURE__ */ n("div", {
+									className: "flex items-center",
+									style: { gap: "var(--spacing-small)" },
+									children: [/* @__PURE__ */ t(f, {
+										name: "timer",
+										size: 20,
+										weight: 300,
+										variant: "rounded",
+										fill: 0,
+										color: "var(--color-icon-secondary)"
+									}), /* @__PURE__ */ t("span", {
+										className: "font-[Archivo] font-medium text-sm leading-[1.5]",
+										style: { color: "var(--color-text-primary)" },
+										children: s
+									})]
+								}),
+								c && /* @__PURE__ */ n("div", {
+									className: "flex items-center",
+									style: { gap: "var(--spacing-small)" },
+									children: [/* @__PURE__ */ t(f, {
+										name: "play_circle",
+										size: 20,
+										weight: 300,
+										variant: "rounded",
+										fill: 0,
+										color: "var(--color-icon-secondary)"
+									}), /* @__PURE__ */ t("span", {
+										className: "font-[Archivo] font-medium text-sm leading-[1.5]",
+										style: { color: "var(--color-text-primary)" },
+										children: c
+									})]
+								})
+							]
+						})
+					]
+				}),
+				/* @__PURE__ */ n("div", {
+					className: "flex flex-1 items-center",
+					style: { gap: "var(--spacing-medium)" },
+					children: [/* @__PURE__ */ t(f, {
+						name: "group",
+						size: 24,
+						weight: 300,
+						variant: "rounded",
+						fill: 0,
+						color: "var(--color-icon-primary)"
+					}), /* @__PURE__ */ n("p", {
+						className: "font-[Archivo] font-medium leading-[1.25] whitespace-nowrap",
+						style: {
+							fontSize: "var(--typography-h3-500-font-size)",
+							color: "var(--color-text-primary)"
+						},
+						children: [
+							l,
+							"/",
+							d
+						]
+					})]
+				}),
+				/* @__PURE__ */ t("div", {
+					className: "flex items-center shrink-0",
+					children: /* @__PURE__ */ t(u, {
+						size: "xlarge",
+						variant: "primary",
+						leftIcon: /* @__PURE__ */ t(f, {
+							name: "calendar_add_on",
+							size: 24,
+							weight: 300,
+							variant: "rounded",
+							fill: 0,
+							color: "var(--color-icon-contained)"
+						}),
+						onClick: (e) => {
+							e.stopPropagation(), p?.(e);
+						},
+						children: "Check-in"
+					})
+				})
+			]
+		})]
+	});
+}
+//#endregion
 //#region src/components/Chip/Chip.tsx
-function p(e) {
+function m(e) {
 	return e === "disabled" ? { borderColor: "var(--color-interaction-primary-disabled)" } : e === "selected" ? { borderColor: "var(--color-interaction-primary-enabled)" } : { borderColor: "var(--color-border-high)" };
 }
-function m(e) {
+function h(e) {
 	return e === "disabled" ? { color: "var(--color-text-disabled)" } : e === "selected" ? { color: "var(--color-text-branded)" } : { color: "var(--color-text-primary)" };
 }
-function h({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: a, rightIcon: o, className: s, style: c, children: l, disabled: u, ...d }) {
-	let f = r === "disabled" || u, h = e === "small", g = h ? "size-4" : "size-6", _ = i ? h ? "size-7" : "size-10" : h ? "h-7 px-2 gap-1" : "h-10 px-4 gap-1";
+function g({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: a, rightIcon: o, className: s, style: c, children: l, disabled: u, ...d }) {
+	let f = r === "disabled" || u, p = e === "small", g = p ? "size-4" : "size-6", _ = i ? p ? "size-7" : "size-10" : p ? "h-7 px-2 gap-1" : "h-10 px-4 gap-1";
 	function v(e) {
 		f || (e.currentTarget.style.background = "var(--color-base-lowest)");
 	}
@@ -172,13 +346,13 @@ function h({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: 
 		className: [
 			"inline-flex items-center justify-center font-[Archivo] border transition-colors select-none rounded-[var(--border-radius-action)]",
 			_,
-			h ? "text-sm font-medium" : "text-base font-semibold",
+			p ? "text-sm font-medium" : "text-base font-semibold",
 			f ? "cursor-not-allowed" : "cursor-pointer",
 			s ?? ""
 		].join(" "),
 		style: {
-			...p(r),
 			...m(r),
+			...h(r),
 			...c
 		},
 		onMouseEnter: v,
@@ -207,7 +381,7 @@ function h({ size: e = "medium", state: r = "idle", iconOnly: i = !1, leftIcon: 
 }
 //#endregion
 //#region src/components/Divider/Divider.tsx
-function g({ intensity: e = "normal", horizontalSpace: n = !1, verticalSpace: r = !1, className: i }) {
+function _({ intensity: e = "normal", horizontalSpace: n = !1, verticalSpace: r = !1, className: i }) {
 	let a = e === "high" ? "bg-[var(--color-border-high)] border border-[var(--color-border-high)]" : "bg-[var(--color-border-normal)]";
 	return r ? /* @__PURE__ */ t("div", {
 		className: ["flex flex-col items-start w-full py-[var(--spacing-small)]", i ?? ""].join(" "),
@@ -222,7 +396,7 @@ function g({ intensity: e = "normal", horizontalSpace: n = !1, verticalSpace: r 
 }
 //#endregion
 //#region src/components/InfoCard/InfoCard.tsx
-function _(e, t) {
+function v(e, t) {
 	let n = "flex items-start rounded-[12px]", r = t === "horizontal" ? "flex-row gap-3 p-4" : "flex-col gap-4 px-5 py-4";
 	switch (e) {
 		case "elevated": return `${n} ${r} bg-white shadow-[0px_2px_16px_0px_rgba(22,22,22,0.12)]`;
@@ -230,7 +404,7 @@ function _(e, t) {
 		case "filled": return `${n} ${r} bg-[var(--color-base-lowest)]`;
 	}
 }
-function v({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyebrow: o, title: s, description: c, caption: l, actions: u, className: d }) {
+function y({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyebrow: o, title: s, description: c, caption: l, actions: u, className: d }) {
 	let f = r === "horizontal", p = /* @__PURE__ */ n("div", {
 		className: ["flex flex-1 flex-col items-start min-w-0", f ? "pl-1" : ""].join(" "),
 		children: [
@@ -255,7 +429,7 @@ function v({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyeb
 		]
 	});
 	return /* @__PURE__ */ n("div", {
-		className: [_(i, r), d ?? ""].join(" "),
+		className: [v(i, r), d ?? ""].join(" "),
 		children: [a && /* @__PURE__ */ t("span", {
 			className: "size-6 shrink-0",
 			children: a
@@ -273,7 +447,7 @@ function v({ orientation: r = "horizontal", style: i = "outlined", icon: a, eyeb
 }
 //#endregion
 //#region src/components/Link/Link.tsx
-var y = {
+var b = {
 	small: {
 		text: "text-xs",
 		icon: "size-5"
@@ -287,8 +461,8 @@ var y = {
 		icon: "size-6"
 	}
 };
-function b({ size: e = "small", weight: r = "semibold", leftIcon: i, rightIcon: a, className: o, style: s, children: c, ...l }) {
-	let { text: u, icon: d } = y[e], f = r === "semibold" ? "font-semibold" : "font-medium";
+function x({ size: e = "small", weight: r = "semibold", leftIcon: i, rightIcon: a, className: o, style: s, children: c, ...l }) {
+	let { text: u, icon: d } = b[e], f = r === "semibold" ? "font-semibold" : "font-medium";
 	function p(e) {
 		e.currentTarget.style.borderBottomColor = "currentColor";
 	}
@@ -329,7 +503,7 @@ function b({ size: e = "small", weight: r = "semibold", leftIcon: i, rightIcon: 
 }
 //#endregion
 //#region src/components/ListItem/ListItem.tsx
-function x({ size: e = "large", style: r = "plain", title: i, subtitle: a, tertiaryText: o, leftColumn: s, rightItems: c, divider: l = !1, className: u }) {
+function S({ size: e = "large", style: r = "plain", title: i, subtitle: a, tertiaryText: o, leftColumn: s, rightItems: c, divider: l = !1, className: u }) {
 	let d = e === "small", f = d ? "size-5" : "size-6", p = d ? "gap-[var(--spacing-medium)] p-[var(--spacing-medium)]" : e === "medium" ? "gap-[var(--spacing-large)] px-[var(--spacing-large)] py-[var(--spacing-medium)]" : "gap-[var(--spacing-large)] p-[var(--spacing-large)]", m = d ? "text-sm" : "text-base", h = d ? "text-xs" : "text-sm";
 	return /* @__PURE__ */ n("div", {
 		className: [
@@ -373,7 +547,7 @@ function x({ size: e = "large", style: r = "plain", title: i, subtitle: a, terti
 }
 //#endregion
 //#region src/components/PillButton/PillButton.tsx
-var S = {
+var C = {
 	small: {
 		base: "h-7 text-sm gap-1",
 		icon: "size-4",
@@ -385,10 +559,10 @@ var S = {
 		iconOnly: "size-10 p-2"
 	}
 };
-function C(e, t) {
+function w(e, t) {
 	return t ? e === "primary" ? "cursor-not-allowed" : "border border-[var(--color-border-normal)] cursor-not-allowed" : e === "secondary" ? "border border-[var(--color-border-high)] text-[var(--color-text-primary)]" : "";
 }
-function w(e, t) {
+function T(e, t) {
 	return t ? {
 		background: e === "primary" ? "var(--color-interaction-primary-disabled)" : void 0,
 		color: "var(--color-text-disabled)"
@@ -397,8 +571,8 @@ function w(e, t) {
 		color: "var(--color-text-contained)"
 	} : {};
 }
-function T({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftIcon: a, rightIcon: o, disabled: s = !1, className: c, style: l, children: u, ...d }) {
-	let f = S[r], p = e === "primary";
+function E({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftIcon: a, rightIcon: o, disabled: s = !1, className: c, style: l, children: u, ...d }) {
+	let f = C[r], p = e === "primary";
 	function m(e) {
 		!s && p && (e.currentTarget.style.background = "var(--color-interaction-primary-hover)");
 	}
@@ -416,11 +590,11 @@ function T({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftI
 		className: [
 			"inline-flex items-center justify-center font-semibold font-[Archivo] transition-colors select-none rounded-[var(--border-radius-action)]",
 			i ? f.iconOnly : `px-3 ${f.base}`,
-			C(e, !!s),
+			w(e, !!s),
 			c ?? ""
 		].join(" "),
 		style: {
-			...w(e, !!s),
+			...T(e, !!s),
 			...l
 		},
 		onMouseEnter: m,
@@ -449,7 +623,7 @@ function T({ variant: e = "primary", size: r = "medium", iconOnly: i = !1, leftI
 }
 //#endregion
 //#region src/components/SectionHeader/SectionHeader.tsx
-function E({ level: e = "one", size: r = "default", title: i, subtitle: a, icon: o, actionLabel: s, onAction: c, className: l }) {
+function D({ level: e = "one", size: r = "default", title: i, subtitle: a, icon: o, actionLabel: s, onAction: c, className: l }) {
 	if (e === "two") {
 		let e = r === "small" ? "text-sm" : "text-base";
 		return /* @__PURE__ */ t("div", {
@@ -494,7 +668,7 @@ function E({ level: e = "one", size: r = "default", title: i, subtitle: a, icon:
 }
 //#endregion
 //#region src/components/Snackbar/Snackbar.tsx
-var D = {
+var O = {
 	default: {
 		bg: "bg-[var(--color-base-highest)]",
 		text: "text-[var(--color-text-inverted)]"
@@ -516,8 +690,8 @@ var D = {
 		text: "text-[var(--color-text-primary)]"
 	}
 };
-function O({ type: e = "default", message: r, icon: i, action: a, className: o }) {
-	let { bg: s, text: c } = D[e];
+function k({ type: e = "default", message: r, icon: i, action: a, className: o }) {
+	let { bg: s, text: c } = O[e];
 	return /* @__PURE__ */ n("div", {
 		className: [
 			"flex items-center gap-[var(--spacing-large)] p-[var(--spacing-large)] rounded-[var(--border-radius-xlarge)] min-h-14 w-full max-w-[600px]",
@@ -541,7 +715,7 @@ function O({ type: e = "default", message: r, icon: i, action: a, className: o }
 }
 //#endregion
 //#region src/components/Tag/Tag.tsx
-var k = {
+var A = {
 	default: {
 		bg: "var(--color-base-low)",
 		iconBg: "var(--color-base-low)",
@@ -568,8 +742,8 @@ var k = {
 		color: "var(--color-text-error)"
 	}
 };
-function A({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1, className: o, children: s }) {
-	let { bg: c, iconBg: l, color: u } = k[e], d = r === "small", f = d ? "h-5" : "h-6", p = d ? "px-0.5" : "px-1", m = d ? "p-0.5" : "p-1";
+function j({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1, className: o, children: s }) {
+	let { bg: c, iconBg: l, color: u } = A[e], d = r === "small", f = d ? "h-5" : "h-6", p = d ? "px-0.5" : "px-1", m = d ? "p-0.5" : "p-1";
 	return a && i ? /* @__PURE__ */ t("div", {
 		className: ["inline-flex items-center justify-center rounded-[var(--border-radius-small)]", o ?? ""].join(" "),
 		style: { background: c },
@@ -603,7 +777,7 @@ function A({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1
 }
 //#endregion
 //#region src/assets/logos/KardiaIsotipo.tsx
-function j({ size: e, width: r, height: i, ...a }) {
+function M({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 177.96 202.2",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -621,7 +795,7 @@ function j({ size: e, width: r, height: i, ...a }) {
 }
 //#endregion
 //#region src/assets/logos/KardiaImagotipo.tsx
-function M({ size: e, width: r, height: i, ...a }) {
+function N({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 1031.57 154.37",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -660,4 +834,4 @@ function M({ size: e, width: r, height: i, ...a }) {
 	});
 }
 //#endregion
-export { a as Alert, u as Button, h as Chip, g as Divider, f as Icon, v as InfoCard, M as KardiaImagotipo, j as KardiaIsotipo, b as Link, x as ListItem, T as PillButton, E as SectionHeader, O as Snackbar, A as Tag };
+export { a as Alert, u as Button, g as Chip, _ as Divider, f as Icon, y as InfoCard, N as KardiaImagotipo, M as KardiaIsotipo, x as Link, S as ListItem, E as PillButton, D as SectionHeader, k as Snackbar, j as Tag, p as TrainingCard };

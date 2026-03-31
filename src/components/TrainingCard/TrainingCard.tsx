@@ -50,16 +50,16 @@ export function TrainingCard({
           <p className={styles.coachName}>{coachName}</p>
           <div className={styles.infoList}>
             <div className={styles.infoRow}>
-              <Icon name="calendar_today" size={20} weight={300} variant="rounded" fill={0} color="var(--color-icon-secondary)" />
+              <Icon name="calendar_today" size={20} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />
               <span className={styles.infoText}>{date}</span>
             </div>
             <div className={styles.infoRow}>
-              <Icon name="timer" size={20} weight={300} variant="rounded" fill={0} color="var(--color-icon-secondary)" />
+              <Icon name="timer" size={20} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />
               <span className={styles.infoText}>{duration}</span>
             </div>
             {music && (
               <div className={styles.infoRow}>
-                <Icon name="play_circle" size={20} weight={300} variant="rounded" fill={0} color="var(--color-icon-secondary)" />
+                <Icon name="play_circle" size={20} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />
                 <span className={styles.infoText}>{music}</span>
               </div>
             )}

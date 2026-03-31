@@ -190,7 +190,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: s
 										weight: 300,
 										variant: "rounded",
 										fill: 0,
-										color: "var(--color-icon-secondary)"
+										color: "var(--color-icon-primary)"
 									}), /* @__PURE__ */ t("span", {
 										className: o.infoText,
 										children: s
@@ -204,7 +204,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: s
 										weight: 300,
 										variant: "rounded",
 										fill: 0,
-										color: "var(--color-icon-secondary)"
+										color: "var(--color-icon-primary)"
 									}), /* @__PURE__ */ t("span", {
 										className: o.infoText,
 										children: c
@@ -218,7 +218,7 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: s
 										weight: 300,
 										variant: "rounded",
 										fill: 0,
-										color: "var(--color-icon-secondary)"
+										color: "var(--color-icon-primary)"
 									}), /* @__PURE__ */ t("span", {
 										className: o.infoText,
 										children: u

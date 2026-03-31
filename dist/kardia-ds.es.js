@@ -66,6 +66,7 @@ var o = {
 	infoRow: "TrainingCard-module__infoRow___f9bae",
 	infoText: "TrainingCard-module__infoText___8c2d2",
 	spots: "TrainingCard-module__spots___b52dc",
+	spotsIcon: "TrainingCard-module__spotsIcon___24450",
 	spotsCount: "TrainingCard-module__spotsCount___eeff2",
 	checkin: "TrainingCard-module__checkin___1a210"
 }, s = {
@@ -230,13 +231,16 @@ function p({ coachImage: e, coachName: r, sessionType: i, specialTag: a, date: s
 				}),
 				/* @__PURE__ */ n("div", {
 					className: o.spots,
-					children: [/* @__PURE__ */ t(f, {
-						name: "group",
-						size: 24,
-						weight: 300,
-						variant: "rounded",
-						fill: 0,
-						color: "var(--color-icon-primary)"
+					children: [/* @__PURE__ */ t("span", {
+						className: o.spotsIcon,
+						children: /* @__PURE__ */ t(f, {
+							name: "group",
+							size: 24,
+							weight: 300,
+							variant: "rounded",
+							fill: 0,
+							color: "var(--color-icon-primary)"
+						})
 					}), /* @__PURE__ */ n("p", {
 						className: o.spotsCount,
 						children: [

@@ -1,0 +1,201 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 108px;
+  min-width: 320px;
+  overflow: hidden;
+  border-radius: var(--border-radius-xlarge);
+  background: var(--color-base-flat);
+}
+
+/* ── Variant backgrounds ──────────────────────────── */
+.variantIdle,
+.variantSensorError,
+.variantNoSensor {
+  background: var(--gradient-base-dark, linear-gradient(90deg, #000 0%, #2a2a2a 100%));
+}
+
+.variantLow {
+  background: var(--gradient-feedback-success, linear-gradient(270deg, rgba(0,194,110,0.6) 0%, rgba(0,194,110,0.15) 100%)), var(--color-base-flat);
+}
+
+.variantMedium {
+  background: var(--gradient-feedback-warning, linear-gradient(90deg, rgba(255,132,32,0.15) 0%, rgba(255,132,32,0.6) 100%)), var(--color-base-flat);
+}
+
+.variantHigh {
+  background: var(--gradient-feedback-branded, linear-gradient(90deg, rgba(235,40,44,0.15) 0%, rgba(235,40,44,0.6) 100%)), var(--color-base-flat);
+}
+
+/* ── Image ────────────────────────────────────────── */
+.image {
+  flex-shrink: 0;
+  width: 108px;
+  height: 108px;
+  overflow: hidden;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Content ──────────────────────────────────────── */
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-medium);
+  padding: var(--spacing-medium);
+  min-width: 0;
+}
+
+.left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  height: 100%;
+  min-width: 0;
+  padding-bottom: var(--spacing-xsmall);
+  justify-content: center;
+}
+
+.name {
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: var(--typography-h5-500-font-size);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  width: 100%;
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+}
+
+.metricRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-xsmall);
+  color: var(--color-text-primary);
+}
+
+.kardiaIcon {
+  font-family: Archivo, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.metricValue {
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: var(--typography-h5-500-font-size);
+  line-height: 1.25;
+  color: inherit;
+}
+
+.metricUnit {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: var(--typography-secondary-600-font-size);
+  line-height: 1.5;
+  color: inherit;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.metricDimmed {
+  color: var(--color-text-secondary);
+}
+
+/* ── Right ────────────────────────────────────────── */
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.editBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.editBtn:hover { opacity: 1; }
+
+.valueArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.bigNumber {
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1.167;
+  color: var(--color-text-primary);
+  text-align: right;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.statusInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-xsmall);
+}
+
+.statusTextWarning {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: var(--typography-secondary-600-font-size);
+  line-height: 1.5;
+  color: var(--color-text-warning);
+  white-space: nowrap;
+}
+
+.statusTextSecondary {
+  font-family: Archivo, sans-serif;
+  font-weight: 600;
+  font-size: var(--typography-secondary-600-font-size);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}

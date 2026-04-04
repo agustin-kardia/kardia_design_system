@@ -735,9 +735,167 @@ function B({ type: e = "default", size: r = "regular", icon: i, iconOnly: a = !1
 		})]
 	});
 }
+var V = {
+	root: "WorkoutCard-module__root___1a5e6",
+	variantIdle: "WorkoutCard-module__variantIdle___bb96f",
+	variantSensorError: "WorkoutCard-module__variantSensorError___bfd94",
+	variantNoSensor: "WorkoutCard-module__variantNoSensor___6de50",
+	variantLow: "WorkoutCard-module__variantLow___f6517",
+	variantMedium: "WorkoutCard-module__variantMedium___70c76",
+	variantHigh: "WorkoutCard-module__variantHigh___19a67",
+	image: "WorkoutCard-module__image___f68e0",
+	content: "WorkoutCard-module__content___e3b18",
+	left: "WorkoutCard-module__left___f09ac",
+	name: "WorkoutCard-module__name___57be2",
+	metrics: "WorkoutCard-module__metrics___5c817",
+	metricRow: "WorkoutCard-module__metricRow___8ebc8",
+	kardiaIcon: "WorkoutCard-module__kardiaIcon___8aa7d",
+	metricValue: "WorkoutCard-module__metricValue___2b1cb",
+	metricUnit: "WorkoutCard-module__metricUnit___58d9f",
+	metricDimmed: "WorkoutCard-module__metricDimmed___a0bb5",
+	right: "WorkoutCard-module__right___751f6",
+	editBtn: "WorkoutCard-module__editBtn___79d63",
+	valueArea: "WorkoutCard-module__valueArea___06057",
+	bigNumber: "WorkoutCard-module__bigNumber___e2c65",
+	statusInfo: "WorkoutCard-module__statusInfo___446a4",
+	statusTextWarning: "WorkoutCard-module__statusTextWarning___a2f3e",
+	statusTextSecondary: "WorkoutCard-module__statusTextSecondary___92aa1"
+}, H = {
+	idle: V.variantIdle,
+	low: V.variantLow,
+	medium: V.variantMedium,
+	high: V.variantHigh,
+	"sensor-error": V.variantSensorError,
+	"no-sensor": V.variantNoSensor
+};
+function U({ participantName: e, participantImage: r, sensorId: i, variant: a = "idle", kardiaPoints: o, calories: s, intensityPercent: c, onEdit: l, className: u, children: d }) {
+	let p = o != null || s != null, m = a === "low" || a === "medium" || a === "high";
+	return /* @__PURE__ */ n("div", {
+		className: [
+			V.root,
+			H[a],
+			u ?? ""
+		].filter(Boolean).join(" "),
+		children: [
+			d,
+			/* @__PURE__ */ t("div", {
+				className: V.image,
+				children: /* @__PURE__ */ t("img", {
+					src: r || `https://placehold.co/108x108/2A2A2A/666?text=${e?.[0] || "?"}`,
+					alt: e,
+					onError: (t) => {
+						t.target.src = `https://placehold.co/108x108/2A2A2A/666?text=${e?.[0] || "?"}`;
+					}
+				})
+			}),
+			/* @__PURE__ */ n("div", {
+				className: V.content,
+				children: [/* @__PURE__ */ n("div", {
+					className: V.left,
+					children: [/* @__PURE__ */ t("p", {
+						className: V.name,
+						children: e
+					}), /* @__PURE__ */ n("div", {
+						className: V.metrics,
+						children: [/* @__PURE__ */ n("div", {
+							className: V.metricRow,
+							children: [
+								/* @__PURE__ */ t("span", {
+									className: V.kardiaIcon,
+									children: "K"
+								}),
+								/* @__PURE__ */ t("span", {
+									className: [V.metricValue, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									children: m && o != null ? Math.round(o) : ""
+								}),
+								/* @__PURE__ */ t("span", {
+									className: [V.metricUnit, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									children: "puntos"
+								})
+							]
+						}), /* @__PURE__ */ n("div", {
+							className: V.metricRow,
+							children: [
+								/* @__PURE__ */ t(f, {
+									name: "local_fire_department",
+									size: 20,
+									weight: 300,
+									variant: "rounded",
+									fill: m ? 1 : 0,
+									color: m ? "currentColor" : "var(--color-icon-secondary)"
+								}),
+								/* @__PURE__ */ t("span", {
+									className: [V.metricValue, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									children: m && s != null ? Math.round(s) : ""
+								}),
+								/* @__PURE__ */ t("span", {
+									className: [V.metricUnit, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									children: "kcal"
+								})
+							]
+						})]
+					})]
+				}), /* @__PURE__ */ n("div", {
+					className: V.right,
+					children: [/* @__PURE__ */ t("button", {
+						className: V.editBtn,
+						onClick: (e) => {
+							e.stopPropagation(), l?.(e);
+						},
+						"aria-label": "Opciones",
+						children: /* @__PURE__ */ t(f, {
+							name: "more_horiz",
+							size: 24,
+							weight: 300,
+							variant: "rounded",
+							fill: 0,
+							color: "var(--color-icon-primary)"
+						})
+					}), /* @__PURE__ */ n("div", {
+						className: V.valueArea,
+						children: [
+							(a === "idle" || m) && /* @__PURE__ */ t("p", {
+								className: V.bigNumber,
+								children: a === "idle" ? c ?? (i == null ? "--" : `#${i}`) : c ?? "--"
+							}),
+							a === "sensor-error" && /* @__PURE__ */ n("div", {
+								className: V.statusInfo,
+								children: [/* @__PURE__ */ t(f, {
+									name: "warning",
+									size: 32,
+									weight: 300,
+									variant: "rounded",
+									fill: 0,
+									color: "var(--color-feedback-warning)"
+								}), /* @__PURE__ */ t("span", {
+									className: V.statusTextWarning,
+									children: "Error del sensor"
+								})]
+							}),
+							a === "no-sensor" && /* @__PURE__ */ n("div", {
+								className: V.statusInfo,
+								children: [/* @__PURE__ */ t(f, {
+									name: "block",
+									size: 32,
+									weight: 300,
+									variant: "rounded",
+									fill: 0,
+									color: "var(--color-text-secondary)"
+								}), /* @__PURE__ */ t("span", {
+									className: V.statusTextSecondary,
+									children: "Sin sensor"
+								})]
+							})
+						]
+					})]
+				})]
+			})
+		]
+	});
+}
 //#endregion
 //#region src/assets/logos/KardiaIsotipo.tsx
-function V({ size: e, width: r, height: i, ...a }) {
+function W({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 177.96 202.2",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -755,7 +913,7 @@ function V({ size: e, width: r, height: i, ...a }) {
 }
 //#endregion
 //#region src/assets/logos/KardiaImagotipo.tsx
-function H({ size: e, width: r, height: i, ...a }) {
+function G({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 1031.57 154.37",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -794,4 +952,4 @@ function H({ size: e, width: r, height: i, ...a }) {
 	});
 }
 //#endregion
-export { a as Alert, l as Button, v as Chip, b as Divider, f as Icon, S as InfoCard, H as KardiaImagotipo, V as KardiaIsotipo, E as Link, O as ListItem, N as PillButton, F as SectionHeader, R as Snackbar, B as Tag, p as TrainingCard };
+export { a as Alert, l as Button, v as Chip, b as Divider, f as Icon, S as InfoCard, G as KardiaImagotipo, W as KardiaIsotipo, E as Link, O as ListItem, N as PillButton, F as SectionHeader, R as Snackbar, B as Tag, p as TrainingCard, U as WorkoutCard };

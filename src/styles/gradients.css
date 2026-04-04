@@ -1,0 +1,9 @@
+:root,
+[data-theme="dark"] {
+  --gradient-feedback-success: linear-gradient(270deg, color-mix(in srgb, var(--color-feedback-success) 60%, transparent) 0%, color-mix(in srgb, var(--color-feedback-success) 15%, transparent) 100%);
+  --gradient-feedback-warning: linear-gradient(90deg, color-mix(in srgb, var(--color-feedback-warning) 15%, transparent) 0%, color-mix(in srgb, var(--color-feedback-warning) 60%, transparent) 100%);
+  --gradient-feedback-branded: linear-gradient(90deg, color-mix(in srgb, var(--color-brand-primary) 15%, transparent) 0%, color-mix(in srgb, var(--color-brand-primary) 60%, transparent) 100%);
+  --gradient-feedback-error: linear-gradient(90deg, color-mix(in srgb, var(--color-feedback-error) 15%, transparent) 0%, color-mix(in srgb, var(--color-feedback-error) 60%, transparent) 100%);
+  --gradient-feedback-info: linear-gradient(90deg, color-mix(in srgb, var(--color-feedback-info) 15%, transparent) 0%, color-mix(in srgb, var(--color-feedback-info) 60%, transparent) 100%);
+  --gradient-base-dark: linear-gradient(90deg, var(--color-base-flat) 0%, var(--color-base-lowest) 100%);
+}

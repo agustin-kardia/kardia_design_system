@@ -11,3 +11,4 @@ export * from './PillButton/PillButton';
 export * from './SectionHeader/SectionHeader';
 export * from './Snackbar/Snackbar';
 export * from './Tag/Tag';
+export * from './WorkoutCard/WorkoutCard';

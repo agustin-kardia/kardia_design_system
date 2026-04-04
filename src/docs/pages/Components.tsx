@@ -12,6 +12,7 @@ import { Alert } from '../../components/Alert/Alert';
 import { Snackbar } from '../../components/Snackbar/Snackbar';
 import { Icon } from '../../components/Icon/Icon';
 import { TrainingCard } from '../../components/TrainingCard/TrainingCard';
+import { WorkoutCard } from '../../components/WorkoutCard/WorkoutCard';
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
@@ -387,6 +388,36 @@ export default function ComponentsPage() {
             spotsUsed={20}
             spotsTotal={25}
           />
+        </div>
+      </ComponentDoc>
+
+      {/* ── WorkoutCard ── */}
+      <ComponentDoc
+        name="WorkoutCard"
+        status="done"
+        description="Live workout participant card for facility displays. Six variants driven by sensor state and real-time intensity data."
+        props={['variant: idle | low | medium | high | sensor-error | no-sensor', 'participantName', 'participantImage?', 'sensorId?', 'kardiaPoints?', 'calories?', 'intensityPercent?', 'onEdit?', 'children?']}
+      >
+        <div className="w-full flex flex-col gap-3">
+          {(
+            [
+              { variant: 'idle',         label: 'Idle — sensor assigned, waiting to connect',  kardiaPoints: null, calories: null, intensityPercent: null, sensorId: 12 },
+              { variant: 'low',          label: 'Intensity Low (≤ 60%)',                        kardiaPoints: 42,   calories: 210, intensityPercent: 52  },
+              { variant: 'medium',       label: 'Intensity Medium (≤ 80%)',                     kardiaPoints: 87,   calories: 430, intensityPercent: 73  },
+              { variant: 'high',         label: 'Intensity High (> 80%)',                       kardiaPoints: 134,  calories: 680, intensityPercent: 91  },
+              { variant: 'sensor-error', label: 'Sensor Error',                                 kardiaPoints: null, calories: null, intensityPercent: null },
+              { variant: 'no-sensor',    label: 'No Sensor',                                    kardiaPoints: null, calories: null, intensityPercent: null },
+            ] as const
+          ).map(({ variant, label, ...props }) => (
+            <div key={variant}>
+              <p className="text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--color-text-disabled)' }}>{label}</p>
+              <WorkoutCard
+                variant={variant}
+                participantName="Ignacio F."
+                {...props}
+              />
+            </div>
+          ))}
         </div>
       </ComponentDoc>
 

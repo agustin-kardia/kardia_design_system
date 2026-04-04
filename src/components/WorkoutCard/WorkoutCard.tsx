@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './WorkoutCard.module.css';
 import { Icon } from '../Icon/Icon';
+import { KardiaIsotipo } from '../../assets/logos/KardiaIsotipo';
 
 export type WorkoutCardVariant = 'idle' | 'low' | 'medium' | 'high' | 'sensor-error' | 'no-sensor';
 
@@ -72,7 +73,7 @@ export function WorkoutCard({
           <p className={styles.name}>{participantName}</p>
           <div className={styles.metrics}>
             <div className={styles.metricRow}>
-              <span className={styles.kardiaIcon}>K</span>
+              <KardiaIsotipo size={14} className={styles.kardiaIcon} />
               <span className={[styles.metricValue, !hasMetrics || !showValues ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 {showValues && kardiaPoints != null ? Math.round(kardiaPoints) : ''}
               </span>

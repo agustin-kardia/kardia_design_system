@@ -760,7 +760,28 @@ var V = {
 	statusInfo: "WorkoutCard-module__statusInfo___446a4",
 	statusTextWarning: "WorkoutCard-module__statusTextWarning___a2f3e",
 	statusTextSecondary: "WorkoutCard-module__statusTextSecondary___92aa1"
-}, H = {
+};
+//#endregion
+//#region src/assets/logos/KardiaIsotipo.tsx
+function H({ size: e, width: r, height: i, ...a }) {
+	return /* @__PURE__ */ n("svg", {
+		viewBox: "0 0 177.96 202.2",
+		xmlns: "http://www.w3.org/2000/svg",
+		width: e ?? r ?? 177.96,
+		height: e ?? i ?? 202.2,
+		...a,
+		children: [/* @__PURE__ */ t("polygon", {
+			fill: "currentColor",
+			points: "138.29 202.2 177.96 202.2 158.38 101.1 118.74 101.1 138.32 0 98.65 0 79.07 101.1 118.72 101.1 138.29 202.2"
+		}), /* @__PURE__ */ t("polygon", {
+			fill: "currentColor",
+			points: "0 0 0 202.2 19.83 202.2 59.5 202.2 79.07 101.1 39.67 101.1 39.67 0 0 0"
+		})]
+	});
+}
+//#endregion
+//#region src/components/WorkoutCard/WorkoutCard.tsx
+var U = {
 	idle: V.variantIdle,
 	low: V.variantLow,
 	medium: V.variantMedium,
@@ -768,12 +789,12 @@ var V = {
 	"sensor-error": V.variantSensorError,
 	"no-sensor": V.variantNoSensor
 };
-function U({ participantName: e, participantImage: r, sensorId: i, variant: a = "idle", kardiaPoints: o, calories: s, intensityPercent: c, onEdit: l, className: u, children: d }) {
+function W({ participantName: e, participantImage: r, sensorId: i, variant: a = "idle", kardiaPoints: o, calories: s, intensityPercent: c, onEdit: l, className: u, children: d }) {
 	let p = o != null || s != null, m = a === "low" || a === "medium" || a === "high";
 	return /* @__PURE__ */ n("div", {
 		className: [
 			V.root,
-			H[a],
+			U[a],
 			u ?? ""
 		].filter(Boolean).join(" "),
 		children: [
@@ -800,9 +821,9 @@ function U({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 						children: [/* @__PURE__ */ n("div", {
 							className: V.metricRow,
 							children: [
-								/* @__PURE__ */ t("span", {
-									className: V.kardiaIcon,
-									children: "K"
+								/* @__PURE__ */ t(H, {
+									size: 14,
+									className: V.kardiaIcon
 								}),
 								/* @__PURE__ */ t("span", {
 									className: [V.metricValue, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
@@ -894,24 +915,6 @@ function U({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 	});
 }
 //#endregion
-//#region src/assets/logos/KardiaIsotipo.tsx
-function W({ size: e, width: r, height: i, ...a }) {
-	return /* @__PURE__ */ n("svg", {
-		viewBox: "0 0 177.96 202.2",
-		xmlns: "http://www.w3.org/2000/svg",
-		width: e ?? r ?? 177.96,
-		height: e ?? i ?? 202.2,
-		...a,
-		children: [/* @__PURE__ */ t("polygon", {
-			fill: "currentColor",
-			points: "138.29 202.2 177.96 202.2 158.38 101.1 118.74 101.1 138.32 0 98.65 0 79.07 101.1 118.72 101.1 138.29 202.2"
-		}), /* @__PURE__ */ t("polygon", {
-			fill: "currentColor",
-			points: "0 0 0 202.2 19.83 202.2 59.5 202.2 79.07 101.1 39.67 101.1 39.67 0 0 0"
-		})]
-	});
-}
-//#endregion
 //#region src/assets/logos/KardiaImagotipo.tsx
 function G({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
@@ -952,4 +955,4 @@ function G({ size: e, width: r, height: i, ...a }) {
 	});
 }
 //#endregion
-export { a as Alert, l as Button, v as Chip, b as Divider, f as Icon, S as InfoCard, G as KardiaImagotipo, W as KardiaIsotipo, E as Link, O as ListItem, N as PillButton, F as SectionHeader, R as Snackbar, B as Tag, p as TrainingCard, U as WorkoutCard };
+export { a as Alert, l as Button, v as Chip, b as Divider, f as Icon, S as InfoCard, G as KardiaImagotipo, H as KardiaIsotipo, E as Link, O as ListItem, N as PillButton, F as SectionHeader, R as Snackbar, B as Tag, p as TrainingCard, W as WorkoutCard };

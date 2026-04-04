@@ -76,7 +76,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
-  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .metrics {
@@ -87,23 +88,15 @@
 
 .metricRow {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--spacing-xsmall);
   color: var(--color-text-primary);
 }
 
 .kardiaIcon {
-  font-family: Archivo, sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 1;
   color: inherit;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
   flex-shrink: 0;
+  display: block;
 }
 
 .metricValue {

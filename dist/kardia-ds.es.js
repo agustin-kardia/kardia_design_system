@@ -759,7 +759,10 @@ var V = {
 	bigNumber: "WorkoutCard-module__bigNumber___e2c65",
 	statusInfo: "WorkoutCard-module__statusInfo___446a4",
 	statusTextWarning: "WorkoutCard-module__statusTextWarning___a2f3e",
-	statusTextSecondary: "WorkoutCard-module__statusTextSecondary___92aa1"
+	statusTextSecondary: "WorkoutCard-module__statusTextSecondary___92aa1",
+	impact: "WorkoutCard-module__impact___3416a",
+	cardImpactScale: "WorkoutCard-module__cardImpactScale___9956b",
+	cardImpactFlash: "WorkoutCard-module__cardImpactFlash___1eeb7"
 };
 //#endregion
 //#region src/assets/logos/KardiaIsotipo.tsx

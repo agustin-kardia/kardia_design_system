@@ -16,30 +16,23 @@ const NAV: { id: Page; label: string; icon: string }[] = [
 
 export default function App() {
   const [page, setPage] = useState<Page>('overview');
+  const [menuOpen, setMenuOpen] = useState(false);
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
-  return (
-    <div
-      className="flex h-screen overflow-hidden"
-      style={{
-        background: isDark ? 'var(--color-base-flat)' : '#ffffff',
-        color: isDark ? 'var(--color-text-primary)' : '#161616',
-      }}
-    >
-      {/* Sidebar */}
-      <aside
-        className="w-56 shrink-0 flex flex-col h-screen transition-colors"
-        style={{
-          borderRight: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}`,
-          background: isDark ? 'var(--color-base-lowest)' : '#ffffff',
-        }}
+  function navigate(p: Page) {
+    setPage(p);
+    setMenuOpen(false);
+  }
+
+  const sidebarContent = (
+    <>
+      {/* Logo */}
+      <div
+        className="px-5 py-5"
+        style={{ borderBottom: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}` }}
       >
-        {/* Logo */}
-        <div
-          className="px-5 py-5"
-          style={{ borderBottom: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}` }}
-        >
+        <div className="flex items-center justify-between gap-2.5">
           <div className="flex items-center gap-2.5">
             <div className="size-6 rounded-md bg-[#eb282c] flex items-center justify-center shrink-0 p-1">
               <KardiaIsotipo color="#111112" width="100%" height="100%" />
@@ -49,58 +42,145 @@ export default function App() {
               <p className="text-[10px]" style={{ color: 'var(--color-text-secondary)' }}>v0.1.0</p>
             </div>
           </div>
+          {/* Close button — mobile only */}
+          <button
+            className="flex items-center justify-center rounded-lg p-1 hamburger-only"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
+            <Icon name="close" size={20} weight={300} variant="rounded" fill={0} />
+          </button>
         </div>
+      </div>
 
-        {/* Nav */}
-        <nav className="p-3 flex flex-col gap-0.5 flex-1">
-          {NAV.map(item => (
-            <button
-              key={item.id}
-              onClick={() => setPage(item.id)}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2.5 transition-colors"
-              style={
-                page === item.id
-                  ? { background: isDark ? 'rgba(235,40,44,0.15)' : '#fcdfe0', color: '#eb282c' }
-                  : { color: 'var(--color-text-secondary)' }
+      {/* Nav */}
+      <nav className="p-3 flex flex-col gap-0.5 flex-1">
+        {NAV.map(item => (
+          <button
+            key={item.id}
+            onClick={() => navigate(item.id)}
+            className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2.5 transition-colors"
+            style={
+              page === item.id
+                ? { background: isDark ? 'rgba(235,40,44,0.15)' : '#fcdfe0', color: '#eb282c' }
+                : { color: 'var(--color-text-secondary)' }
+            }
+            onMouseEnter={e => {
+              if (page !== item.id) {
+                (e.currentTarget as HTMLElement).style.background = isDark ? 'var(--color-base-low)' : '#f9f9f9';
+                (e.currentTarget as HTMLElement).style.color = 'var(--color-text-primary)';
               }
-              onMouseEnter={e => {
-                if (page !== item.id) {
-                  (e.currentTarget as HTMLElement).style.background = isDark ? 'var(--color-base-low)' : '#f9f9f9';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--color-text-primary)';
-                }
-              }}
-              onMouseLeave={e => {
-                if (page !== item.id) {
-                  (e.currentTarget as HTMLElement).style.background = 'transparent';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--color-text-secondary)';
-                }
+            }}
+            onMouseLeave={e => {
+              if (page !== item.id) {
+                (e.currentTarget as HTMLElement).style.background = 'transparent';
+                (e.currentTarget as HTMLElement).style.color = 'var(--color-text-secondary)';
+              }
+            }}
+          >
+            <Icon name={item.icon} size={20} weight={300} variant="rounded" fill={0} />
+            {item.label}
+          </button>
+        ))}
+      </nav>
+
+      {/* Theme toggle + footer */}
+      <div
+        className="px-4 py-4 flex flex-col gap-3"
+        style={{ borderTop: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}` }}
+      >
+        <ThemeToggle />
+        <p className="text-[10px] leading-relaxed" style={{ color: 'var(--color-text-disabled)' }}>
+          Source of truth: Figma — Kardia Customer App
+        </p>
+      </div>
+    </>
+  );
+
+  return (
+    <>
+      <style>{`
+        @media (max-width: 760px) {
+          .sidebar-desktop { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+          .mobile-drawer {
+            position: fixed; inset: 0; z-index: 50;
+          }
+          .mobile-drawer-backdrop {
+            position: absolute; inset: 0;
+            background: rgba(0,0,0,0.5);
+          }
+          .mobile-drawer-panel {
+            position: absolute; top: 0; left: 0; bottom: 0;
+            width: 224px;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+          }
+        }
+        @media (min-width: 761px) {
+          .hamburger-btn { display: none !important; }
+          .mobile-drawer { display: none !important; }
+          .hamburger-only { display: none !important; }
+        }
+      `}</style>
+
+      <div
+        className="flex h-screen overflow-hidden"
+        style={{
+          background: isDark ? 'var(--color-base-flat)' : '#ffffff',
+          color: isDark ? 'var(--color-text-primary)' : '#161616',
+        }}
+      >
+        {/* Sidebar — desktop */}
+        <aside
+          className="sidebar-desktop w-56 shrink-0 flex flex-col h-screen transition-colors"
+          style={{
+            borderRight: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}`,
+            background: isDark ? 'var(--color-base-lowest)' : '#ffffff',
+          }}
+        >
+          {sidebarContent}
+        </aside>
+
+        {/* Hamburger button — mobile only */}
+        <button
+          className="hamburger-btn fixed top-4 left-4 z-40 items-center justify-center rounded-lg p-2"
+          style={{
+            background: isDark ? 'var(--color-base-lowest)' : '#ffffff',
+            border: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}`,
+            color: 'var(--color-text-primary)',
+          }}
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <Icon name="menu" size={20} weight={300} variant="rounded" fill={0} />
+        </button>
+
+        {/* Mobile drawer */}
+        {menuOpen && (
+          <div className="mobile-drawer">
+            <div className="mobile-drawer-backdrop" onClick={() => setMenuOpen(false)} />
+            <div
+              className="mobile-drawer-panel"
+              style={{
+                background: isDark ? 'var(--color-base-lowest)' : '#ffffff',
+                borderRight: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}`,
               }}
             >
-              <Icon name={item.icon} size={20} weight={300} variant="rounded" fill={0} />
-              {item.label}
-            </button>
-          ))}
-        </nav>
+              {sidebarContent}
+            </div>
+          </div>
+        )}
 
-        {/* Theme toggle + footer */}
-        <div
-          className="px-4 py-4 flex flex-col gap-3"
-          style={{ borderTop: `1px solid ${isDark ? 'var(--color-border-normal)' : '#f4f4f4'}` }}
-        >
-          <ThemeToggle />
-          <p className="text-[10px] leading-relaxed" style={{ color: 'var(--color-text-disabled)' }}>
-            Source of truth: Figma — Kardia Customer App
-          </p>
-        </div>
-      </aside>
-
-      {/* Content */}
-      <main className="flex-1 overflow-y-auto">
-        {page === 'overview' && <OverviewPage onNavigate={setPage} />}
-        {page === 'tokens' && <TokensPage />}
-        {page === 'components' && <ComponentsPage />}
-      </main>
-    </div>
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto">
+          {page === 'overview' && <OverviewPage onNavigate={navigate} />}
+          {page === 'tokens' && <TokensPage />}
+          {page === 'components' && <ComponentsPage />}
+        </main>
+      </div>
+    </>
   );
 }
 

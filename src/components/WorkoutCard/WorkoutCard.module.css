@@ -132,6 +132,7 @@
   justify-content: space-between;
   height: 100%;
   flex-shrink: 0;
+  width: 80px;
 }
 
 .editBtn {
@@ -166,6 +167,7 @@
   text-align: right;
   white-space: nowrap;
   margin: 0;
+  width: 100%;
 }
 
 .statusInfo {
@@ -191,4 +193,40 @@
   line-height: 1.5;
   color: var(--color-text-secondary);
   white-space: nowrap;
+}
+
+/* ── Impact animation ─────────────────────────────── */
+@keyframes cardImpactScale {
+  0%   { transform: scale(1); }
+  15%  { transform: scale(1.05); }
+  40%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes cardImpactFlash {
+  0%   { opacity: 0; transform: translateX(-100%); }
+  20%  { opacity: 0.9; transform: translateX(0); }
+  40%  { opacity: 0; transform: translateX(100%); }
+  100% { opacity: 0; transform: translateX(100%); }
+}
+
+.impact {
+  animation: cardImpactScale 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.impact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 80%,
+    transparent 100%
+  );
+  animation: cardImpactFlash 450ms ease-out;
+  pointer-events: none;
+  z-index: 2;
 }

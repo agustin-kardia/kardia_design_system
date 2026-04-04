@@ -12,7 +12,8 @@ import { Alert } from '../../components/Alert/Alert';
 import { Snackbar } from '../../components/Snackbar/Snackbar';
 import { Icon } from '../../components/Icon/Icon';
 import { TrainingCard } from '../../components/TrainingCard/TrainingCard';
-import { WorkoutCard } from '../../components/WorkoutCard/WorkoutCard';
+import { WorkoutCard, WorkoutCardVariant } from '../../components/WorkoutCard/WorkoutCard';
+import workoutCardStyles from '../../components/WorkoutCard/WorkoutCard.module.css';
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
@@ -75,7 +76,7 @@ function ComponentDoc({
       )}
 
       <div className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border-high)' }}>
-        <div className="p-6 flex flex-wrap gap-4 items-center min-h-[80px]" style={{ background: 'var(--color-base-lowest)' }}>
+        <div className="p-6 flex flex-wrap gap-4 items-center min-h-[80px]" style={{ background: 'var(--color-base-flat)' }}>
           {children}
         </div>
       </div>
@@ -94,6 +95,86 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
       <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--color-text-disabled)' }}>{label}</p>
       <div className="flex flex-wrap items-center gap-3">{children}</div>
     </div>
+  );
+}
+
+// ─── WorkoutCard animation demo ───────────────────────────────────────────────
+
+const ZONE_METRICS: Record<WorkoutCardVariant, { kardiaPoints: number | null; calories: number | null; intensityPercent: number | null }> = {
+  idle:           { kardiaPoints: null, calories: null, intensityPercent: null },
+  low:            { kardiaPoints: 42,   calories: 210,  intensityPercent: 52 },
+  medium:         { kardiaPoints: 87,   calories: 430,  intensityPercent: 73 },
+  high:           { kardiaPoints: 134,  calories: 680,  intensityPercent: 91 },
+  'sensor-error': { kardiaPoints: null, calories: null, intensityPercent: null },
+  'no-sensor':    { kardiaPoints: null, calories: null, intensityPercent: null },
+};
+
+function WorkoutCardAnimationDemo({
+  title,
+  description,
+  sequence,
+  styles,
+  buttonLabel,
+}: {
+  title: string;
+  description: string;
+  sequence: WorkoutCardVariant[];
+  styles: Record<string, string>;
+  buttonLabel: string;
+}) {
+  const [variantIndex, setVariantIndex] = useState(0);
+  const [impactKey, setImpactKey] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const variant = sequence[variantIndex];
+  const metrics = ZONE_METRICS[variant];
+
+  function trigger() {
+    if (animating) return;
+    const nextIndex = (variantIndex + 1) % sequence.length;
+    setVariantIndex(nextIndex);
+    setImpactKey(k => k + 1);
+    setAnimating(true);
+    setTimeout(() => setAnimating(false), 450);
+  }
+
+  return (
+    <section className="mb-10">
+      <div className="flex items-start justify-between mb-1">
+        <h2 className="text-lg font-bold" style={{ color: 'var(--color-text-primary)' }}>{title}</h2>
+      </div>
+      <p className="text-sm mb-4" style={{ color: 'var(--color-text-secondary)' }}>{description}</p>
+
+      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--color-border-high)' }}>
+        <div className="p-6 flex flex-col gap-4" style={{ background: 'var(--color-base-flat)' }}>
+          <WorkoutCard
+            key={impactKey}
+            variant={variant}
+            participantName="Ignacio Fernández"
+            sensorId={12}
+            {...metrics}
+            className={animating ? styles.impact : undefined}
+          />
+          <div>
+            <button
+              onClick={trigger}
+              disabled={animating}
+              className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              style={{
+                background: 'var(--color-brand-primary)',
+                color: '#fff',
+                opacity: animating ? 0.6 : 1,
+                cursor: animating ? 'not-allowed' : 'pointer',
+              }}
+            >
+              {buttonLabel} (current: {variant})
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px mt-10" style={{ background: 'var(--color-border-high)' }} />
+    </section>
   );
 }
 
@@ -420,6 +501,24 @@ export default function ComponentsPage() {
           ))}
         </div>
       </ComponentDoc>
+
+      {/* ── WorkoutCard — Zone Up animation demo ── */}
+      <WorkoutCardAnimationDemo
+        title="WorkoutCard — Zone Up Animation"
+        description="Triggered when a participant moves up to a higher intensity zone (e.g. low → medium → high). Click the button to fire the impact animation."
+        sequence={['low', 'medium', 'high'] as WorkoutCardVariant[]}
+        styles={workoutCardStyles}
+        buttonLabel="Zone Up ↑"
+      />
+
+      {/* ── WorkoutCard — Zone Down animation demo ── */}
+      <WorkoutCardAnimationDemo
+        title="WorkoutCard — Zone Down Animation"
+        description="Triggered when a participant drops to a lower intensity zone (e.g. high → medium → low). Click the button to fire the impact animation."
+        sequence={['high', 'medium', 'low'] as WorkoutCardVariant[]}
+        styles={workoutCardStyles}
+        buttonLabel="Zone Down ↓"
+      />
 
       {/* ── Text Input (planned) ── */}
       <ComponentDoc

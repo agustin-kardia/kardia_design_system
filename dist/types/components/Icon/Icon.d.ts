@@ -1,4 +1,4 @@
-export type IconSize = 16 | 20 | 24 | 40;
+export type IconSize = 16 | 20 | 24 | 32 | 40;
 export type IconFill = 0 | 1;
 export type IconWeight = 100 | 200 | 300 | 400 | 500 | 600 | 700;
 export type IconVariant = 'outlined' | 'rounded' | 'sharp';

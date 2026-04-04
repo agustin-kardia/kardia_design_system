@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly",
+    "build": "vite build && tsc --emitDeclarationOnly && node sd.config.js",
     "docs:build": "vite build --config vite.docs.config.ts",
     "tokens:extract": "node scripts/extract-tokens.mjs",
     "tokens:build": "node sd.config.js",

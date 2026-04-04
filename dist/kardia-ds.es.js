@@ -789,8 +789,12 @@ var U = {
 	"sensor-error": V.variantSensorError,
 	"no-sensor": V.variantNoSensor
 };
-function W({ participantName: e, participantImage: r, sensorId: i, variant: a = "idle", kardiaPoints: o, calories: s, intensityPercent: c, onEdit: l, className: u, children: d }) {
-	let p = o != null || s != null, m = a === "low" || a === "medium" || a === "high";
+function W(e) {
+	let t = e.trim(), n = t.lastIndexOf(" ");
+	return n === -1 ? t : `${t.slice(0, n)} ${t[n + 1]}.`;
+}
+function G({ participantName: e, participantImage: r, sensorId: i, variant: a = "idle", kardiaPoints: o, calories: s, intensityPercent: c, onEdit: l, className: u, children: d }) {
+	let p = W(e), m = o != null || s != null, h = a === "low" || a === "medium" || a === "high";
 	return /* @__PURE__ */ n("div", {
 		className: [
 			V.root,
@@ -815,7 +819,7 @@ function W({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 					className: V.left,
 					children: [/* @__PURE__ */ t("p", {
 						className: V.name,
-						children: e
+						children: p
 					}), /* @__PURE__ */ n("div", {
 						className: V.metrics,
 						children: [/* @__PURE__ */ n("div", {
@@ -826,11 +830,11 @@ function W({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 									className: V.kardiaIcon
 								}),
 								/* @__PURE__ */ t("span", {
-									className: [V.metricValue, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
-									children: m && o != null ? Math.round(o) : ""
+									className: [V.metricValue, !m || !h ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									children: h && o != null ? Math.round(o) : ""
 								}),
 								/* @__PURE__ */ t("span", {
-									className: [V.metricUnit, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									className: [V.metricUnit, !m || !h ? V.metricDimmed : ""].filter(Boolean).join(" "),
 									children: "puntos"
 								})
 							]
@@ -842,15 +846,15 @@ function W({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 									size: 20,
 									weight: 300,
 									variant: "rounded",
-									fill: m ? 1 : 0,
-									color: m ? "currentColor" : "var(--color-icon-secondary)"
+									fill: h ? 1 : 0,
+									color: h ? "currentColor" : "var(--color-icon-secondary)"
 								}),
 								/* @__PURE__ */ t("span", {
-									className: [V.metricValue, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
-									children: m && s != null ? Math.round(s) : ""
+									className: [V.metricValue, !m || !h ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									children: h && s != null ? Math.round(s) : ""
 								}),
 								/* @__PURE__ */ t("span", {
-									className: [V.metricUnit, !p || !m ? V.metricDimmed : ""].filter(Boolean).join(" "),
+									className: [V.metricUnit, !m || !h ? V.metricDimmed : ""].filter(Boolean).join(" "),
 									children: "kcal"
 								})
 							]
@@ -875,7 +879,7 @@ function W({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 					}), /* @__PURE__ */ n("div", {
 						className: V.valueArea,
 						children: [
-							(a === "idle" || m) && /* @__PURE__ */ t("p", {
+							(a === "idle" || h) && /* @__PURE__ */ t("p", {
 								className: V.bigNumber,
 								children: a === "idle" ? c ?? (i == null ? "--" : `#${i}`) : c ?? "--"
 							}),
@@ -916,7 +920,7 @@ function W({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 }
 //#endregion
 //#region src/assets/logos/KardiaImagotipo.tsx
-function G({ size: e, width: r, height: i, ...a }) {
+function K({ size: e, width: r, height: i, ...a }) {
 	return /* @__PURE__ */ n("svg", {
 		viewBox: "0 0 1031.57 154.37",
 		xmlns: "http://www.w3.org/2000/svg",
@@ -955,4 +959,4 @@ function G({ size: e, width: r, height: i, ...a }) {
 	});
 }
 //#endregion
-export { a as Alert, l as Button, v as Chip, b as Divider, f as Icon, S as InfoCard, G as KardiaImagotipo, H as KardiaIsotipo, E as Link, O as ListItem, N as PillButton, F as SectionHeader, R as Snackbar, B as Tag, p as TrainingCard, W as WorkoutCard };
+export { a as Alert, l as Button, v as Chip, b as Divider, f as Icon, S as InfoCard, K as KardiaImagotipo, H as KardiaIsotipo, E as Link, O as ListItem, N as PillButton, F as SectionHeader, R as Snackbar, B as Tag, p as TrainingCard, G as WorkoutCard };

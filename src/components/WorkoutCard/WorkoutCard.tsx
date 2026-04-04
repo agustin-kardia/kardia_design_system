@@ -28,6 +28,13 @@ const variantClass: Record<WorkoutCardVariant, string> = {
   'no-sensor': styles.variantNoSensor,
 };
 
+function formatParticipantName(name: string): string {
+  const trimmed = name.trim();
+  const lastSpace = trimmed.lastIndexOf(' ');
+  if (lastSpace === -1) return trimmed;
+  return `${trimmed.slice(0, lastSpace)} ${trimmed[lastSpace + 1]}.`;
+}
+
 export function WorkoutCard({
   participantName,
   participantImage,
@@ -40,6 +47,7 @@ export function WorkoutCard({
   className,
   children,
 }: WorkoutCardProps) {
+  const displayName = formatParticipantName(participantName);
   const hasMetrics = kardiaPoints != null || calories != null;
   const showValues = variant === 'low' || variant === 'medium' || variant === 'high';
 
@@ -70,7 +78,7 @@ export function WorkoutCard({
 
       <div className={styles.content}>
         <div className={styles.left}>
-          <p className={styles.name}>{participantName}</p>
+          <p className={styles.name}>{displayName}</p>
           <div className={styles.metrics}>
             <div className={styles.metricRow}>
               <KardiaIsotipo size={14} className={styles.kardiaIcon} />

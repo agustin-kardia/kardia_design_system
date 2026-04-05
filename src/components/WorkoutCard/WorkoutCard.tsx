@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './WorkoutCard.module.css';
 import { Icon } from '../Icon/Icon';
 import { KardiaIsotipo } from '../../assets/logos/KardiaIsotipo';
+import placeholderImg from '../../assets/img/placeholder.png';
 
 export type WorkoutCardVariant = 'idle' | 'low' | 'medium' | 'high' | 'sensor-error' | 'no-sensor';
 
@@ -50,28 +51,28 @@ export function WorkoutCard({
   const displayName = formatParticipantName(participantName);
   const hasMetrics = kardiaPoints != null || calories != null;
   const showValues = variant === 'low' || variant === 'medium' || variant === 'high';
+  const metricsDimmed = variant === 'no-sensor';
 
   return (
     <div
       className={[
         styles.root,
         variantClass[variant],
+        onEdit ? styles.rootClickable : '',
         className ?? '',
       ]
         .filter(Boolean)
         .join(' ')}
+      onClick={onEdit}
     >
       {children}
 
       <div className={styles.image}>
         <img
-          src={
-            participantImage ||
-            `https://placehold.co/108x108/2A2A2A/666?text=${participantName?.[0] || '?'}`
-          }
+          src={participantImage || placeholderImg}
           alt={participantName}
           onError={(e) => {
-            (e.target as HTMLImageElement).src = `https://placehold.co/108x108/2A2A2A/666?text=${participantName?.[0] || '?'}`;
+            (e.target as HTMLImageElement).src = placeholderImg;
           }}
         />
       </div>
@@ -82,10 +83,10 @@ export function WorkoutCard({
           <div className={styles.metrics}>
             <div className={styles.metricRow}>
               <KardiaIsotipo size={14} className={styles.kardiaIcon} />
-              <span className={[styles.metricValue, !hasMetrics || !showValues ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+              <span className={[styles.metricValue, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 {showValues && kardiaPoints != null ? Math.round(kardiaPoints) : ''}
               </span>
-              <span className={[styles.metricUnit, !hasMetrics || !showValues ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+              <span className={[styles.metricUnit, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 puntos
               </span>
             </div>
@@ -96,12 +97,12 @@ export function WorkoutCard({
                 weight={300}
                 variant="rounded"
                 fill={showValues ? 1 : 0}
-                color={showValues ? 'currentColor' : 'var(--color-icon-secondary)'}
+                color={metricsDimmed ? 'var(--color-icon-secondary)' : 'currentColor'}
               />
-              <span className={[styles.metricValue, !hasMetrics || !showValues ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+              <span className={[styles.metricValue, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 {showValues && calories != null ? Math.round(calories) : ''}
               </span>
-              <span className={[styles.metricUnit, !hasMetrics || !showValues ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+              <span className={[styles.metricUnit, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 kcal
               </span>
             </div>

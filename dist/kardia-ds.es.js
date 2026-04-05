@@ -750,6 +750,7 @@ var V = {
 	name: "WorkoutCard-module__name___57be2",
 	metrics: "WorkoutCard-module__metrics___5c817",
 	metricRow: "WorkoutCard-module__metricRow___8ebc8",
+	kardiaIconWrapper: "WorkoutCard-module__kardiaIconWrapper___d8910",
 	kardiaIcon: "WorkoutCard-module__kardiaIcon___8aa7d",
 	metricValue: "WorkoutCard-module__metricValue___2b1cb",
 	metricUnit: "WorkoutCard-module__metricUnit___58d9f",
@@ -831,9 +832,12 @@ function K({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 						children: [/* @__PURE__ */ n("div", {
 							className: V.metricRow,
 							children: [
-								/* @__PURE__ */ t(H, {
-									size: 14,
-									className: V.kardiaIcon
+								/* @__PURE__ */ t("div", {
+									className: V.kardiaIconWrapper,
+									children: /* @__PURE__ */ t(H, {
+										size: 14,
+										className: V.kardiaIcon
+									})
 								}),
 								/* @__PURE__ */ t("span", {
 									className: [V.metricValue, h ? V.metricDimmed : ""].filter(Boolean).join(" "),

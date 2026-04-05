@@ -82,7 +82,9 @@ export function WorkoutCard({
           <p className={styles.name}>{displayName}</p>
           <div className={styles.metrics}>
             <div className={styles.metricRow}>
-              <KardiaIsotipo size={14} className={styles.kardiaIcon} />
+              <div className={styles.kardiaIconWrapper}>
+                <KardiaIsotipo size={14} className={styles.kardiaIcon} />
+              </div>
               <span className={[styles.metricValue, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 {showValues && kardiaPoints != null ? Math.round(kardiaPoints) : ''}
               </span>

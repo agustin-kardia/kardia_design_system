@@ -153,8 +153,8 @@ export function WorkoutCard({
                   size={32}
                   weight={300}
                   variant="rounded"
-                  fill={1}
-                  color="var(--color-feedback-warning)"
+                  fill={0}
+                  color="var(--color-icon-warning)"
                 />
                 <span className={styles.statusTextWarning}>Error del sensor</span>
               </div>

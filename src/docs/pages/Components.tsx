@@ -482,11 +482,11 @@ export default function ComponentsPage() {
         <div className="w-full flex flex-col gap-3">
           {(
             [
-              { variant: 'idle',         label: 'Idle — sensor assigned, waiting to connect',  kardiaPoints: null, calories: null, intensityPercent: null, sensorId: 12 },
-              { variant: 'low',          label: 'Intensity Low (≤ 60%)',                        kardiaPoints: 42,   calories: 210, intensityPercent: 52  },
-              { variant: 'medium',       label: 'Intensity Medium (≤ 80%)',                     kardiaPoints: 87,   calories: 430, intensityPercent: 73  },
-              { variant: 'high',         label: 'Intensity High (> 80%)',                       kardiaPoints: 134,  calories: 680, intensityPercent: 91  },
-              { variant: 'sensor-error', label: 'Sensor Error',                                 kardiaPoints: null, calories: null, intensityPercent: null },
+              { variant: 'idle',         label: 'Idle — sensor assigned, waiting to connect',  kardiaPoints: null, calories: null,  intensityPercent: null, sensorId: 12 },
+              { variant: 'low',          label: 'Intensity Low (≤ 60%)',                        kardiaPoints: 42,   calories: 210,  intensityPercent: 52  },
+              { variant: 'medium',       label: 'Intensity Medium (≤ 80%)',                     kardiaPoints: 87,   calories: 430,  intensityPercent: 73  },
+              { variant: 'high',         label: 'Intensity High (> 80%)',                       kardiaPoints: 134,  calories: 680,  intensityPercent: 91  },
+              { variant: 'sensor-error', label: 'Sensor Error — shows last known data',         kardiaPoints: 87,   calories: 430,  intensityPercent: null },
               { variant: 'no-sensor',    label: 'No Sensor',                                    kardiaPoints: null, calories: null, intensityPercent: null },
             ] as const
           ).map(({ variant, label, ...props }) => (
@@ -494,7 +494,7 @@ export default function ComponentsPage() {
               <p className="text-[10px] font-semibold uppercase tracking-wider mb-1.5" style={{ color: 'var(--color-text-disabled)' }}>{label}</p>
               <WorkoutCard
                 variant={variant}
-                participantName="Ignacio F."
+                participantName="Ignacio Fernández"
                 {...props}
               />
             </div>

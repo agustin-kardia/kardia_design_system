@@ -33,7 +33,7 @@ function formatParticipantName(name: string): string {
   const trimmed = name.trim();
   const lastSpace = trimmed.lastIndexOf(' ');
   if (lastSpace === -1) return trimmed;
-  return `${trimmed.slice(0, lastSpace)} ${trimmed[lastSpace + 1]}.`;
+  return `${trimmed.slice(0, lastSpace)} ${trimmed[lastSpace + 1]}`;
 }
 
 export function WorkoutCard({
@@ -49,9 +49,13 @@ export function WorkoutCard({
   children,
 }: WorkoutCardProps) {
   const displayName = formatParticipantName(participantName);
-  const hasMetrics = kardiaPoints != null || calories != null;
   const showValues = variant === 'low' || variant === 'medium' || variant === 'high';
-  const metricsDimmed = variant === 'no-sensor';
+  const noSensor = variant === 'no-sensor';
+
+  // Determine displayed metric numbers
+  const showActualValues = showValues || variant === 'sensor-error';
+  const displayKardiaPoints = showActualValues && kardiaPoints != null ? Math.round(kardiaPoints) : 0;
+  const displayCalories = showActualValues && calories != null ? Math.round(calories) : 0;
 
   return (
     <div
@@ -82,13 +86,13 @@ export function WorkoutCard({
           <p className={styles.name}>{displayName}</p>
           <div className={styles.metrics}>
             <div className={styles.metricRow}>
-              <div className={styles.kardiaIconWrapper}>
+              <div className={[styles.kardiaIconWrapper, noSensor ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 <KardiaIsotipo size={14} className={styles.kardiaIcon} />
               </div>
-              <span className={[styles.metricValue, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
-                {showValues && kardiaPoints != null ? Math.round(kardiaPoints) : ''}
+              <span className={[styles.metricValue, noSensor ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+                {displayKardiaPoints}
               </span>
-              <span className={[styles.metricUnit, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+              <span className={[styles.metricUnit, noSensor ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 puntos
               </span>
             </div>
@@ -98,13 +102,13 @@ export function WorkoutCard({
                 size={20}
                 weight={300}
                 variant="rounded"
-                fill={showValues ? 1 : 0}
-                color={metricsDimmed ? 'var(--color-icon-secondary)' : 'currentColor'}
+                fill={1}
+                color={noSensor ? 'var(--color-icon-secondary)' : 'currentColor'}
               />
-              <span className={[styles.metricValue, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
-                {showValues && calories != null ? Math.round(calories) : ''}
+              <span className={[styles.metricValue, noSensor ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+                {displayCalories}
               </span>
-              <span className={[styles.metricUnit, metricsDimmed ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
+              <span className={[styles.metricUnit, noSensor ? styles.metricDimmed : ''].filter(Boolean).join(' ')}>
                 kcal
               </span>
             </div>
@@ -149,7 +153,7 @@ export function WorkoutCard({
                   size={32}
                   weight={300}
                   variant="rounded"
-                  fill={0}
+                  fill={1}
                   color="var(--color-feedback-warning)"
                 />
                 <span className={styles.statusTextWarning}>Error del sensor</span>

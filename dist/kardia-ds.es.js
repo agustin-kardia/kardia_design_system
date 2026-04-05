@@ -796,10 +796,10 @@ var U = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANgAAADYCAYAAACJIC3tAAAAC
 };
 function G(e) {
 	let t = e.trim(), n = t.lastIndexOf(" ");
-	return n === -1 ? t : `${t.slice(0, n)} ${t[n + 1]}.`;
+	return n === -1 ? t : `${t.slice(0, n)} ${t[n + 1]}`;
 }
 function K({ participantName: e, participantImage: r, sensorId: i, variant: a = "idle", kardiaPoints: o, calories: s, intensityPercent: c, onEdit: l, className: u, children: d }) {
-	let p = G(e), m = a === "low" || a === "medium" || a === "high", h = a === "no-sensor";
+	let p = G(e), m = a === "low" || a === "medium" || a === "high", h = a === "no-sensor", g = m || a === "sensor-error", _ = g && o != null ? Math.round(o) : 0, v = g && s != null ? Math.round(s) : 0;
 	return /* @__PURE__ */ n("div", {
 		className: [
 			V.root,
@@ -833,7 +833,7 @@ function K({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 							className: V.metricRow,
 							children: [
 								/* @__PURE__ */ t("div", {
-									className: V.kardiaIconWrapper,
+									className: [V.kardiaIconWrapper, h ? V.metricDimmed : ""].filter(Boolean).join(" "),
 									children: /* @__PURE__ */ t(H, {
 										size: 14,
 										className: V.kardiaIcon
@@ -841,7 +841,7 @@ function K({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 								}),
 								/* @__PURE__ */ t("span", {
 									className: [V.metricValue, h ? V.metricDimmed : ""].filter(Boolean).join(" "),
-									children: m && o != null ? Math.round(o) : ""
+									children: _
 								}),
 								/* @__PURE__ */ t("span", {
 									className: [V.metricUnit, h ? V.metricDimmed : ""].filter(Boolean).join(" "),
@@ -856,12 +856,12 @@ function K({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 									size: 20,
 									weight: 300,
 									variant: "rounded",
-									fill: m ? 1 : 0,
+									fill: 1,
 									color: h ? "var(--color-icon-secondary)" : "currentColor"
 								}),
 								/* @__PURE__ */ t("span", {
 									className: [V.metricValue, h ? V.metricDimmed : ""].filter(Boolean).join(" "),
-									children: m && s != null ? Math.round(s) : ""
+									children: v
 								}),
 								/* @__PURE__ */ t("span", {
 									className: [V.metricUnit, h ? V.metricDimmed : ""].filter(Boolean).join(" "),
@@ -900,7 +900,7 @@ function K({ participantName: e, participantImage: r, sensorId: i, variant: a = 
 									size: 32,
 									weight: 300,
 									variant: "rounded",
-									fill: 0,
+									fill: 1,
 									color: "var(--color-feedback-warning)"
 								}), /* @__PURE__ */ t("span", {
 									className: V.statusTextWarning,

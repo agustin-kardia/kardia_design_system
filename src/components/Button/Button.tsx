@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Button.module.css';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonVariant = 'primary' | 'secondary' | 'secondary-branded' | 'tertiary';
 export type ButtonSize = 'small' | 'medium' | 'large' | 'xlarge';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,6 +18,13 @@ const iconClass: Record<ButtonSize, string> = {
   medium: styles.iconMd,
   large: styles.iconLg,
   xlarge: styles.iconLg,
+};
+
+const variantClass: Record<ButtonVariant, string> = {
+  primary: styles.primary,
+  secondary: styles.secondary,
+  'secondary-branded': styles.secondaryBranded,
+  tertiary: styles.tertiary,
 };
 
 export function Button({
@@ -38,7 +45,7 @@ export function Button({
       className={[
         styles.root,
         styles[size],
-        styles[variant],
+        variantClass[variant],
         fullWidth ? styles.fullWidth : '',
         className ?? '',
       ].filter(Boolean).join(' ')}

@@ -1,0 +1,109 @@
+/* ── Overlay ──────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: var(--spacing-3xlarge);
+}
+
+/* ── Dialog ───────────────────────────────────────── */
+.dialog {
+  position: relative;
+  z-index: 1001;
+  width: 100%;
+  max-width: 600px;
+  background: var(--color-base-flat);
+  border-radius: var(--border-radius-3xlarge);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── Main (header + body) ─────────────────────────── */
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--spacing-3xlarge);
+}
+
+/* ── Header ───────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large);
+  padding-top: var(--spacing-2xlarge);
+  padding-bottom: var(--spacing-2xlarge);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--color-base-flat);
+}
+
+.headerStart {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  padding-right: var(--spacing-3xlarge);
+}
+
+.title {
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-h4-700-font-size);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.description {
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-paragraph-500-font-size);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── Body ─────────────────────────────────────────── */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  padding-bottom: var(--spacing-2xlarge);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Footer ───────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large);
+  padding: 0 var(--spacing-3xlarge) var(--spacing-3xlarge);
+}
+
+.footerLeft {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  flex-shrink: 0;
+}

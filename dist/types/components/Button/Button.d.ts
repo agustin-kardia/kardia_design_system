@@ -1,5 +1,5 @@
 import React from 'react';
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
+export type ButtonVariant = 'primary' | 'secondary' | 'secondary-branded' | 'tertiary';
 export type ButtonSize = 'small' | 'medium' | 'large' | 'xlarge';
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;

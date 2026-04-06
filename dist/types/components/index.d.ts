@@ -12,3 +12,6 @@ export * from './SectionHeader/SectionHeader';
 export * from './Snackbar/Snackbar';
 export * from './Tag/Tag';
 export * from './WorkoutCard/WorkoutCard';
+export * from './Checkbox/Checkbox';
+export * from './Dropdown/Dropdown';
+export * from './Modal/Modal';

@@ -1,0 +1,121 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.root.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Trigger ─────────────────────────────────────── */
+.trigger {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: var(--spacing-small) var(--spacing-large);
+  background: var(--color-base-lowest);
+  border: var(--border-width-small) solid var(--color-border-high);
+  border-radius: var(--border-radius-large);
+  cursor: pointer;
+  gap: var(--spacing-small);
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.trigger:hover:not(.root.disabled .trigger) {
+  border-color: var(--color-base-high);
+}
+
+.root.open .trigger {
+  border-color: var(--color-brand-primary);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.label {
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-caption-500-font-size);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.value {
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-paragraph-500-font-size);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.value.placeholder {
+  color: var(--color-text-secondary);
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-icon-primary);
+  transition: transform 0.2s;
+}
+
+.chevron.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ── Sheet (rendered via portal) ─────────────────── */
+.sheet {
+  background: var(--color-base-lowest);
+  border: var(--border-width-small) solid var(--color-border-high);
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--spacing-large);
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-paragraph-500-font-size);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.option:hover {
+  background: var(--color-base-low);
+}
+
+.option.optionSelected {
+  color: var(--color-text-branded);
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 var(--spacing-large);
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-paragraph-500-font-size);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}

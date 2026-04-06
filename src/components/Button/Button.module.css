@@ -35,6 +35,19 @@
 .secondary:active:not(:disabled) { background: var(--color-base-low); }
 .secondary:disabled { color: var(--color-text-disabled); border-color: var(--color-border-high); }
 
+.secondaryBranded {
+  background: transparent;
+  color: var(--color-text-branded);
+  border: var(--border-width-small) solid color-mix(in srgb, var(--color-brand-primary) 50%, transparent);
+}
+.secondaryBranded:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+}
+.secondaryBranded:active:not(:disabled) {
+  background: color-mix(in srgb, var(--color-brand-primary) 15%, transparent);
+}
+.secondaryBranded:disabled { color: var(--color-text-disabled); border-color: var(--color-border-high); }
+
 .tertiary  { background: transparent; color: var(--color-text-branded); border: none; }
 .tertiary:hover:not(:disabled)  { text-decoration: underline; }
 .tertiary:active:not(:disabled) { opacity: 0.75; }

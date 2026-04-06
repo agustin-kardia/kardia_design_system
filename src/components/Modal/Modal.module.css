@@ -16,7 +16,7 @@
   z-index: 1001;
   width: 100%;
   max-width: 600px;
-  background: var(--color-base-flat);
+  background: var(--color-base-lowest);
   border-radius: var(--border-radius-3xlarge);
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
   position: sticky;
   top: 0;
   z-index: 2;
-  background: var(--color-base-flat);
+  background: var(--color-base-lowest);
 }
 
 .headerStart {

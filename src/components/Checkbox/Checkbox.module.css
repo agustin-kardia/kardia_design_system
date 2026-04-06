@@ -32,7 +32,7 @@
 
 .box.checked {
   background: var(--color-feedback-success);
-  border-color: transparent;
+  border: none;
 }
 
 .input {

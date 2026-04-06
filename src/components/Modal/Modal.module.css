@@ -64,7 +64,6 @@
 .heading {
   display: flex;
   align-items: center;
-  padding-right: var(--spacing-3xlarge);
 }
 
 .title {
@@ -74,7 +73,6 @@
   line-height: 1.25;
   color: var(--color-text-primary);
   margin: 0;
-  white-space: nowrap;
 }
 
 .description {
@@ -101,7 +99,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-large);
-  padding: 0 var(--spacing-3xlarge) var(--spacing-medium);
+  padding: 0 var(--spacing-3xlarge) var(--spacing-3xlarge);
 }
 
 /* Full-width stacked button column — use this as the footer prop value */

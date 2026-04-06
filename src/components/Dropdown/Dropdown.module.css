@@ -23,7 +23,8 @@
   box-sizing: border-box;
 }
 
-.trigger:hover:not(.root.disabled .trigger) {
+/* Only apply hover when closed — avoids jarring red flash on mouse-out */
+.root:not(.disabled):not(.open) .trigger:hover {
   border-color: var(--color-base-high);
 }
 
@@ -78,31 +79,35 @@
 
 /* ── Sheet (rendered via portal) ─────────────────── */
 .sheet {
-  background: var(--color-base-lowest);
-  border: var(--border-width-small) solid var(--color-border-high);
-  border-radius: var(--border-radius-large);
+  background: var(--color-base-flat);
+  border-radius: var(--border-radius-xlarge);
+  border: none;
   overflow: hidden;
-  max-height: 240px;
+  max-height: 260px;
   overflow-y: auto;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .option {
   display: flex;
   align-items: center;
-  height: 48px;
-  padding: 0 var(--spacing-large);
+  padding: var(--spacing-medium);
   font-family: Archivo, sans-serif;
-  font-size: var(--typography-paragraph-500-font-size);
+  font-size: var(--typography-secondary-500-font-size);
   font-weight: 500;
   line-height: 1.5;
   color: var(--color-text-primary);
   cursor: pointer;
   transition: background 0.1s;
+  border-bottom: 1px solid var(--color-border-normal);
+}
+
+.option:last-child {
+  border-bottom: none;
 }
 
 .option:hover {
-  background: var(--color-base-low);
+  background: var(--color-base-lowest);
 }
 
 .option.optionSelected {
@@ -112,10 +117,9 @@
 .empty {
   display: flex;
   align-items: center;
-  height: 48px;
-  padding: 0 var(--spacing-large);
+  padding: var(--spacing-medium);
   font-family: Archivo, sans-serif;
-  font-size: var(--typography-paragraph-500-font-size);
+  font-size: var(--typography-secondary-500-font-size);
   font-weight: 500;
   color: var(--color-text-secondary);
 }

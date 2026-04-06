@@ -14,6 +14,11 @@ import { Icon } from '../../components/Icon/Icon';
 import { TrainingCard } from '../../components/TrainingCard/TrainingCard';
 import { WorkoutCard, WorkoutCardVariant } from '../../components/WorkoutCard/WorkoutCard';
 import workoutCardStyles from '../../components/WorkoutCard/WorkoutCard.module.css';
+import { Checkbox } from '../../components/Checkbox/Checkbox';
+import { Radio } from '../../components/Radio/Radio';
+import { Switch } from '../../components/Switch/Switch';
+import { Dropdown } from '../../components/Dropdown/Dropdown';
+import { Modal } from '../../components/Modal/Modal';
 
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
@@ -175,6 +180,196 @@ function WorkoutCardAnimationDemo({
 
       <div className="h-px mt-10" style={{ background: 'var(--color-border-high)' }} />
     </section>
+  );
+}
+
+// ─── Form selector demos ──────────────────────────────────────────────────────
+
+const SENSOR_OPTIONS = [
+  { value: '39584', label: '39584' },
+  { value: '39543', label: '39543' },
+  { value: '39341', label: '39341' },
+  { value: '61251', label: '61251' },
+];
+
+function CheckboxDemo() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <ComponentDoc
+      name="Checkbox"
+      status="done"
+      description="Binary selection control with optional label. Supports indeterminate state."
+      props={['checked?', 'onChange?', 'label?', 'disabled?', 'indeterminate?']}
+    >
+      <Row label="States">
+        <Checkbox />
+        <Checkbox checked={true} />
+        <Checkbox indeterminate={true} />
+        <Checkbox disabled />
+        <Checkbox disabled checked={true} />
+      </Row>
+      <Row label="With label">
+        <Checkbox label="Unchecked" />
+        <Checkbox checked={true} label="Checked" />
+        <Checkbox disabled label="Disabled" />
+      </Row>
+      <Row label="Interactive">
+        <Checkbox checked={checked} onChange={setChecked} label={checked ? 'Entrena sin sensor ✓' : 'Entrena sin sensor'} />
+      </Row>
+    </ComponentDoc>
+  );
+}
+
+function RadioDemo() {
+  const [selected, setSelected] = useState('a');
+  return (
+    <ComponentDoc
+      name="Radio"
+      status="done"
+      description="Single-selection control. Use multiple Radio buttons sharing a name for a group."
+      props={['checked?', 'onChange?', 'label?', 'disabled?', 'name?', 'value?']}
+    >
+      <Row label="States">
+        <Radio />
+        <Radio checked={true} />
+        <Radio disabled />
+        <Radio disabled checked={true} />
+      </Row>
+      <Row label="With label">
+        <Radio label="Unselected" />
+        <Radio checked={true} label="Selected" />
+        <Radio disabled label="Disabled" />
+      </Row>
+      <Row label="Interactive group">
+        <Radio name="demo" value="a" checked={selected === 'a'} onChange={() => setSelected('a')} label="Option A" />
+        <Radio name="demo" value="b" checked={selected === 'b'} onChange={() => setSelected('b')} label="Option B" />
+        <Radio name="demo" value="c" checked={selected === 'c'} onChange={() => setSelected('c')} label="Option C" />
+      </Row>
+    </ComponentDoc>
+  );
+}
+
+function SwitchDemo() {
+  const [sm, setSm] = useState(true);
+  const [md, setMd] = useState(false);
+  return (
+    <ComponentDoc
+      name="Switch"
+      status="done"
+      description="Toggle control with smooth animated transition. Available in small and medium sizes."
+      props={['checked?', 'onChange?', 'size?: small | medium', 'label?', 'disabled?']}
+    >
+      <Row label="Small">
+        <Switch size="small" checked={false} />
+        <Switch size="small" checked={true} />
+        <Switch size="small" checked={false} disabled />
+        <Switch size="small" checked={true} disabled />
+      </Row>
+      <Row label="Medium">
+        <Switch size="medium" checked={false} />
+        <Switch size="medium" checked={true} />
+        <Switch size="medium" checked={false} disabled />
+        <Switch size="medium" checked={true} disabled />
+      </Row>
+      <Row label="Interactive">
+        <Switch size="small" checked={sm} onChange={setSm} label={sm ? 'Small: On' : 'Small: Off'} />
+        <Switch size="medium" checked={md} onChange={setMd} label={md ? 'Medium: On' : 'Medium: Off'} />
+      </Row>
+    </ComponentDoc>
+  );
+}
+
+function DropdownDemo() {
+  const [val, setVal] = useState('');
+  return (
+    <ComponentDoc
+      name="Dropdown"
+      status="done"
+      description="Select input with a portal-rendered option sheet. Supports label, placeholder, and disabled state."
+      props={['options: {value, label}[]', 'value?', 'onChange?', 'label?', 'placeholder?', 'disabled?']}
+    >
+      <Row label="Default (no selection)">
+        <div style={{ width: 280 }}>
+          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" placeholder="Seleccionar ID" />
+        </div>
+      </Row>
+      <Row label="With value">
+        <div style={{ width: 280 }}>
+          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" value="39584" />
+        </div>
+      </Row>
+      <Row label="Interactive">
+        <div style={{ width: 280 }}>
+          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" value={val} onChange={setVal} placeholder="Seleccionar ID" />
+        </div>
+      </Row>
+      <Row label="Disabled">
+        <div style={{ width: 280 }}>
+          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" placeholder="Seleccionar ID" disabled />
+        </div>
+      </Row>
+    </ComponentDoc>
+  );
+}
+
+function ModalDemo() {
+  const [openA, setOpenA] = useState(false);
+  const [openB, setOpenB] = useState(false);
+  return (
+    <ComponentDoc
+      name="Modal"
+      status="done"
+      description="Portal-rendered dialog. Supports eyebrow, title, description, close button, and flexible footer layouts."
+      props={['open', 'onClose?', 'title', 'eyebrow?', 'description?', 'showClose?', 'primaryAction?', 'secondaryAction?', 'footerLeft?', 'footer?', 'children?']}
+    >
+      <Row label="Standard (2 buttons + close)">
+        <button
+          onClick={() => setOpenA(true)}
+          className="px-4 py-2 rounded-lg text-sm font-semibold"
+          style={{ background: 'var(--color-brand-primary)', color: '#fff' }}
+        >
+          Open modal
+        </button>
+        <Modal
+          open={openA}
+          onClose={() => setOpenA(false)}
+          title="Asignar sensor"
+          showClose
+          primaryAction={{ label: 'Confirmar', onClick: () => setOpenA(false) }}
+          secondaryAction={{ label: 'Cancelar', onClick: () => setOpenA(false) }}
+          footerLeft={<Checkbox label="Entrena sin sensor" />}
+        >
+          <div style={{ background: 'var(--color-base-lowest)', borderRadius: 'var(--border-radius-large)', padding: 'var(--spacing-large)', color: 'var(--color-text-primary)' }}>
+            Ignacio F.
+          </div>
+          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" placeholder="Seleccionar ID" />
+        </Modal>
+      </Row>
+      <Row label="Eyebrow + stacked footer (no close)">
+        <button
+          onClick={() => setOpenB(true)}
+          className="px-4 py-2 rounded-lg text-sm font-semibold"
+          style={{ background: 'var(--color-brand-primary)', color: '#fff' }}
+        >
+          Open modal
+        </button>
+        <Modal
+          open={openB}
+          onClose={() => setOpenB(false)}
+          eyebrow="Entrenamiento activo"
+          title="HIIT - Laura está activo actualmente"
+          description="Comenzar un nuevo entrenamiento finalizará el actual."
+          showClose={false}
+          footer={
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-small)', width: '100%', paddingBottom: 'var(--spacing-medium)' }}>
+              <Button variant="secondary-branded" size="xlarge" fullWidth onClick={() => setOpenB(false)}>Continuar con HIIT - Laura</Button>
+              <Button variant="primary" size="xlarge" fullWidth onClick={() => setOpenB(false)}>Comenzar nuevo entrenamiento</Button>
+              <Button variant="tertiary" size="xlarge" fullWidth onClick={() => setOpenB(false)}>Cancelar</Button>
+            </div>
+          }
+        />
+      </Row>
+    </ComponentDoc>
   );
 }
 
@@ -519,6 +714,21 @@ export default function ComponentsPage() {
         styles={workoutCardStyles}
         buttonLabel="Zone Down ↓"
       />
+
+      {/* ── Checkbox ── */}
+      <CheckboxDemo />
+
+      {/* ── Radio ── */}
+      <RadioDemo />
+
+      {/* ── Switch ── */}
+      <SwitchDemo />
+
+      {/* ── Dropdown ── */}
+      <DropdownDemo />
+
+      {/* ── Modal ── */}
+      <ModalDemo />
 
       {/* ── Text Input (planned) ── */}
       <ComponentDoc

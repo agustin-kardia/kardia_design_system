@@ -8,31 +8,31 @@
 
 .root.disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
-.box {
+.circle {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
-  border-radius: var(--border-radius-small);
-  border: var(--border-width-small) solid var(--color-base-normal);
+  border-radius: var(--border-radius-action);
+  border: 2px solid var(--color-border-high);
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
-  transition: background 0.15s, border-color 0.15s;
+  transition: border-color 0.15s, background 0.15s;
   box-sizing: border-box;
 }
 
-.root:not(.disabled):hover .box {
+.root:not(.disabled):hover .circle {
   border-color: var(--color-base-high);
 }
 
-.box.checked {
+.circle.checked {
   background: var(--color-feedback-success);
-  border-color: transparent;
+  border-color: var(--color-feedback-success);
 }
 
 .input {
@@ -45,12 +45,13 @@
   height: 100%;
 }
 
-.checkmark {
-  width: 12px;
-  height: 12px;
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--border-radius-action);
+  background: var(--color-icon-contained);
   flex-shrink: 0;
   pointer-events: none;
-  color: var(--color-icon-contained);
 }
 
 .label {

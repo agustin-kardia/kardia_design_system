@@ -15,3 +15,5 @@ export * from './WorkoutCard/WorkoutCard';
 export * from './Checkbox/Checkbox';
 export * from './Dropdown/Dropdown';
 export * from './Modal/Modal';
+export * from './Radio/Radio';
+export * from './Switch/Switch';

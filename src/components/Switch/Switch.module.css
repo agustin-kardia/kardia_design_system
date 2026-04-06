@@ -1,0 +1,91 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  cursor: pointer;
+  user-select: none;
+}
+
+.root.disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Track ───────────────────────────────────────── */
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-action);
+  border: none;
+  cursor: inherit;
+  padding: 0;
+  transition: background 0.2s;
+  outline: none;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.small {
+  width: 36px;
+  height: 20px;
+}
+
+.medium {
+  width: 48px;
+  height: 28px;
+}
+
+/* States */
+.on {
+  background: var(--color-feedback-success);
+}
+
+.off {
+  background: var(--color-base-low);
+}
+
+/* ── Thumb ───────────────────────────────────────── */
+.thumb {
+  position: absolute;
+  border-radius: var(--border-radius-action);
+  background: var(--color-icon-contained);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  pointer-events: none;
+}
+
+.thumb_small {
+  width: 16px;
+  height: 16px;
+  left: 2px;
+}
+
+.thumb_medium {
+  width: 24px;
+  height: 24px;
+  left: 2px;
+}
+
+/* Checked thumb position — shift right */
+.on .thumb_small {
+  transform: translateX(16px);
+}
+
+.on .thumb_medium {
+  transform: translateX(20px);
+}
+
+/* ── Label ───────────────────────────────────────── */
+.label {
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-paragraph-400-font-size);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+}

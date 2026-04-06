@@ -197,7 +197,6 @@
 }
 
 [data-theme='dark'] {
-  --color-interaction-primary-disabled: #6b6b6b;
   --color-base-flat: #000000;
   --color-base-lowest: #2a2a2a;
   --color-base-low: #6b6b6b;

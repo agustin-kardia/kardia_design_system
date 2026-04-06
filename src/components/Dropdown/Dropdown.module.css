@@ -14,7 +14,7 @@
   align-items: center;
   height: 56px;
   padding: var(--spacing-small) var(--spacing-large);
-  background: var(--color-base-lowest);
+  background: var(--color-base-flat);
   border: var(--border-width-small) solid var(--color-border-high);
   border-radius: var(--border-radius-large);
   cursor: pointer;

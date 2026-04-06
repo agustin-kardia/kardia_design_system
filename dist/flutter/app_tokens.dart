@@ -13,7 +13,6 @@ class AppTokens {
   static const Color colorInteractionPrimaryHover = Color(0xFFC50004);
   static const Color colorInteractionPrimaryPressed = Color(0xFFB80004);
   static const Color colorInteractionPrimaryDisabled = Color(0xFFDBDBDB);
-  static const Color colorInteractionPrimaryDisabledDark = Color(0xFF6B6B6B);
   static const Color colorInteractionSecondary = Color(0xFF707070);
   static const Color colorInteractionTertiary = Color(0xFFEB7CA3);
   static const Color colorFeedbackBranded = Color(0xFFEB282C);

@@ -51,6 +51,16 @@
   gap: 6px;
 }
 
+.eyebrow {
+  font-family: Archivo, sans-serif;
+  font-size: var(--typography-secondary-700-font-size);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-text-branded);
+  margin: 0;
+  white-space: nowrap;
+}
+
 .heading {
   display: flex;
   align-items: center;
@@ -91,7 +101,16 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-large);
-  padding: 0 var(--spacing-3xlarge) var(--spacing-3xlarge);
+  padding: 0 var(--spacing-3xlarge) var(--spacing-medium);
+}
+
+/* Full-width stacked button column — use this as the footer prop value */
+.footerStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  width: 100%;
+  padding-bottom: var(--spacing-medium);
 }
 
 .footerLeft {

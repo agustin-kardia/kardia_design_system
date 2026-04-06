@@ -16,6 +16,8 @@ export interface ModalProps {
   open: boolean;
   /** Called when overlay is clicked or close button is pressed */
   onClose?: () => void;
+  /** Small branded label rendered above the title */
+  eyebrow?: string;
   /** Required heading rendered at the top */
   title: string;
   /** Optional sub-heading below the title */
@@ -28,6 +30,11 @@ export interface ModalProps {
   secondaryAction?: ModalAction;
   /** Optional content rendered on the left side of the footer */
   footerLeft?: React.ReactNode;
+  /**
+   * Fully custom footer — when provided, replaces the default
+   * primaryAction / secondaryAction / footerLeft layout entirely.
+   */
+  footer?: React.ReactNode;
   /** Body content */
   children?: React.ReactNode;
   className?: string;
@@ -36,12 +43,14 @@ export interface ModalProps {
 export function Modal({
   open,
   onClose,
+  eyebrow,
   title,
   description,
   showClose = true,
   primaryAction,
   secondaryAction,
   footerLeft,
+  footer,
   children,
   className,
 }: ModalProps) {
@@ -58,7 +67,10 @@ export function Modal({
   if (!open) return null;
 
   const hasFooter =
-    primaryAction != null || secondaryAction != null || footerLeft != null;
+    footer != null ||
+    primaryAction != null ||
+    secondaryAction != null ||
+    footerLeft != null;
 
   const dialog = (
     <div
@@ -79,6 +91,9 @@ export function Modal({
           {/* Header */}
           <div className={styles.header}>
             <div className={styles.headerStart}>
+              {eyebrow && (
+                <p className={styles.eyebrow}>{eyebrow}</p>
+              )}
               <div className={styles.heading}>
                 <h2 id="modal-title" className={styles.title}>
                   {title}
@@ -117,29 +132,35 @@ export function Modal({
         {/* ── Footer ────────────────────────────────── */}
         {hasFooter && (
           <div className={styles.footer}>
-            <div className={styles.footerLeft}>{footerLeft}</div>
-            <div className={styles.footerRight}>
-              {secondaryAction && (
-                <Button
-                  variant="secondary-branded"
-                  size="xlarge"
-                  onClick={secondaryAction.onClick}
-                  disabled={secondaryAction.disabled}
-                >
-                  {secondaryAction.label}
-                </Button>
-              )}
-              {primaryAction && (
-                <Button
-                  variant="primary"
-                  size="xlarge"
-                  onClick={primaryAction.onClick}
-                  disabled={primaryAction.disabled}
-                >
-                  {primaryAction.label}
-                </Button>
-              )}
-            </div>
+            {footer != null ? (
+              footer
+            ) : (
+              <>
+                <div className={styles.footerLeft}>{footerLeft}</div>
+                <div className={styles.footerRight}>
+                  {secondaryAction && (
+                    <Button
+                      variant="secondary-branded"
+                      size="xlarge"
+                      onClick={secondaryAction.onClick}
+                      disabled={secondaryAction.disabled}
+                    >
+                      {secondaryAction.label}
+                    </Button>
+                  )}
+                  {primaryAction && (
+                    <Button
+                      variant="primary"
+                      size="xlarge"
+                      onClick={primaryAction.onClick}
+                      disabled={primaryAction.disabled}
+                    >
+                      {primaryAction.label}
+                    </Button>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>

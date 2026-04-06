@@ -1090,17 +1090,19 @@ var $ = {
 	main: "Modal-module__main___7926b",
 	header: "Modal-module__header___20b1b",
 	headerStart: "Modal-module__headerStart___89f38",
+	eyebrow: "Modal-module__eyebrow___e691a",
 	heading: "Modal-module__heading___3b9c0",
 	title: "Modal-module__title___03939",
 	description: "Modal-module__description___89463",
 	body: "Modal-module__body___95586",
 	footer: "Modal-module__footer___aeba3",
+	footerStack: "Modal-module__footerStack___4f857",
 	footerLeft: "Modal-module__footerLeft___745c3",
 	footerRight: "Modal-module__footerRight___8b42b"
 };
 //#endregion
 //#region src/components/Modal/Modal.tsx
-function ie({ open: t, onClose: n, title: r, description: i, showClose: c = !0, primaryAction: l, secondaryAction: u, footerLeft: d, children: f, className: p }) {
+function ie({ open: t, onClose: n, eyebrow: r, title: c, description: l, showClose: u = !0, primaryAction: d, secondaryAction: f, footerLeft: p, footer: m, children: g, className: _ }) {
 	if (e.useEffect(() => {
 		if (!t) return;
 		function e(e) {
@@ -1108,13 +1110,13 @@ function ie({ open: t, onClose: n, title: r, description: i, showClose: c = !0, 
 		}
 		return document.addEventListener("keydown", e), () => document.removeEventListener("keydown", e);
 	}, [t, n]), !t) return null;
-	let m = l != null || u != null || d != null, g = /* @__PURE__ */ a("div", {
+	let y = m != null || d != null || f != null || p != null, b = /* @__PURE__ */ a("div", {
 		className: $.overlay,
 		onClick: n,
 		role: "presentation",
 		"aria-hidden": "true",
 		children: /* @__PURE__ */ o("div", {
-			className: [$.dialog, p ?? ""].filter(Boolean).join(" "),
+			className: [$.dialog, _ ?? ""].filter(Boolean).join(" "),
 			onClick: (e) => e.stopPropagation(),
 			role: "dialog",
 			"aria-modal": "true",
@@ -1125,18 +1127,25 @@ function ie({ open: t, onClose: n, title: r, description: i, showClose: c = !0, 
 					className: $.header,
 					children: [/* @__PURE__ */ o("div", {
 						className: $.headerStart,
-						children: [/* @__PURE__ */ a("div", {
-							className: $.heading,
-							children: /* @__PURE__ */ a("h2", {
-								id: "modal-title",
-								className: $.title,
+						children: [
+							r && /* @__PURE__ */ a("p", {
+								className: $.eyebrow,
 								children: r
+							}),
+							/* @__PURE__ */ a("div", {
+								className: $.heading,
+								children: /* @__PURE__ */ a("h2", {
+									id: "modal-title",
+									className: $.title,
+									children: c
+								})
+							}),
+							l && /* @__PURE__ */ a("p", {
+								className: $.description,
+								children: l
 							})
-						}), i && /* @__PURE__ */ a("p", {
-							className: $.description,
-							children: i
-						})]
-					}), c && n && /* @__PURE__ */ a(R, {
+						]
+					}), u && n && /* @__PURE__ */ a(R, {
 						variant: "secondary",
 						size: "medium",
 						iconOnly: !0,
@@ -1150,35 +1159,35 @@ function ie({ open: t, onClose: n, title: r, description: i, showClose: c = !0, 
 						onClick: n,
 						"aria-label": "Cerrar"
 					})]
-				}), f != null && /* @__PURE__ */ a("div", {
+				}), g != null && /* @__PURE__ */ a("div", {
 					className: $.body,
-					children: f
+					children: g
 				})]
-			}), m && /* @__PURE__ */ o("div", {
+			}), y && /* @__PURE__ */ a("div", {
 				className: $.footer,
-				children: [/* @__PURE__ */ a("div", {
+				children: m ?? /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a("div", {
 					className: $.footerLeft,
-					children: d
+					children: p
 				}), /* @__PURE__ */ o("div", {
 					className: $.footerRight,
-					children: [u && /* @__PURE__ */ a(h, {
+					children: [f && /* @__PURE__ */ a(h, {
 						variant: "secondary-branded",
 						size: "xlarge",
-						onClick: u.onClick,
-						disabled: u.disabled,
-						children: u.label
-					}), l && /* @__PURE__ */ a(h, {
+						onClick: f.onClick,
+						disabled: f.disabled,
+						children: f.label
+					}), d && /* @__PURE__ */ a(h, {
 						variant: "primary",
 						size: "xlarge",
-						onClick: l.onClick,
-						disabled: l.disabled,
-						children: l.label
+						onClick: d.onClick,
+						disabled: d.disabled,
+						children: d.label
 					})]
-				})]
+				})] })
 			})]
 		})
 	});
-	return typeof document > "u" ? g : s.createPortal(g, document.body);
+	return typeof document > "u" ? b : s.createPortal(b, document.body);
 }
 //#endregion
 //#region src/assets/logos/KardiaImagotipo.tsx

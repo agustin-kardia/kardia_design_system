@@ -162,7 +162,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 
 export default function TokensPage() {
   return (
-    <div className="max-w-3xl mx-auto px-10 py-12">
+    <div className="max-w-3xl mx-auto px-5 sm:px-10 pt-16 sm:pt-12 pb-8 sm:pb-12">
       <div className="mb-10">
         <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>Tokens</h1>
         <p style={{ color: 'var(--color-text-secondary)' }}>

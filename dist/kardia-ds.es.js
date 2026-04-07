@@ -1097,6 +1097,7 @@ var Z = {
 	body: "Modal-module__body___95586",
 	footer: "Modal-module__footer___aeba3",
 	footerStack: "Modal-module__footerStack___4f857",
+	footerCompact: "Modal-module__footerCompact___c30a4",
 	footerLeft: "Modal-module__footerLeft___745c3",
 	footerRight: "Modal-module__footerRight___8b42b"
 };
@@ -1164,7 +1165,7 @@ function oe({ open: t, onClose: n, eyebrow: r, title: c, description: l, showClo
 					children: g
 				})]
 			}), y && /* @__PURE__ */ a("div", {
-				className: Z.footer,
+				className: [Z.footer, m == null ? "" : Z.footerCompact].filter(Boolean).join(" "),
 				children: m ?? /* @__PURE__ */ o(i, { children: [/* @__PURE__ */ a("div", {
 					className: Z.footerLeft,
 					children: p

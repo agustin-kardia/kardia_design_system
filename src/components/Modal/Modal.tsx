@@ -131,7 +131,7 @@ export function Modal({
 
         {/* ── Footer ────────────────────────────────── */}
         {hasFooter && (
-          <div className={styles.footer}>
+          <div className={[styles.footer, footer != null ? styles.footerCompact : ''].filter(Boolean).join(' ')}>
             {footer != null ? (
               footer
             ) : (

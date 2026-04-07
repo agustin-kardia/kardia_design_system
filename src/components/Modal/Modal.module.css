@@ -108,6 +108,10 @@
   flex-direction: column;
   gap: var(--spacing-small);
   width: 100%;
+}
+
+/* Reduced bottom padding for custom footer (e.g. stacked buttons — Figma: 12px) */
+.footerCompact {
   padding-bottom: var(--spacing-medium);
 }
 

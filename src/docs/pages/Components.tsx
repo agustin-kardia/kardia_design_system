@@ -86,11 +86,26 @@ function ComponentDoc({
         </div>
       </div>
 
-      <div className="h-px mt-10" style={{ background: 'var(--color-border-high)' }} />
     </section>
   );
 }
 
+
+// ─── Category header ──────────────────────────────────────────────────────────
+
+function CategoryHeader({ id, title, description }: { id: string; title: string; description?: string }) {
+  return (
+    <div id={id} className="mt-12 mb-8 scroll-mt-8">
+      <div className="flex items-center gap-3 mb-1">
+        <h2 className="text-xl font-bold" style={{ color: 'var(--color-text-primary)' }}>{title}</h2>
+      </div>
+      {description && (
+        <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{description}</p>
+      )}
+      <div className="h-px mt-3" style={{ background: 'linear-gradient(to right, var(--color-brand-primary), transparent)' }} />
+    </div>
+  );
+}
 
 // ─── Row label helper ─────────────────────────────────────────────────────────
 
@@ -178,7 +193,6 @@ function WorkoutCardAnimationDemo({
         </div>
       </div>
 
-      <div className="h-px mt-10" style={{ background: 'var(--color-border-high)' }} />
     </section>
   );
 }
@@ -315,6 +329,7 @@ function DropdownDemo() {
 function ModalDemo() {
   const [openA, setOpenA] = useState(false);
   const [openB, setOpenB] = useState(false);
+  const [openC, setOpenC] = useState(false);
   return (
     <ComponentDoc
       name="Modal"
@@ -322,7 +337,7 @@ function ModalDemo() {
       description="Portal-rendered dialog. Supports eyebrow, title, description, close button, and flexible footer layouts."
       props={['open', 'onClose?', 'title', 'eyebrow?', 'description?', 'showClose?', 'primaryAction?', 'secondaryAction?', 'footerLeft?', 'footer?', 'children?']}
     >
-      <Row label="Standard (2 buttons + close)">
+      <Row label="Simple (2 side-by-side buttons, no close)">
         <button
           onClick={() => setOpenA(true)}
           className="px-4 py-2 rounded-lg text-sm font-semibold"
@@ -333,19 +348,14 @@ function ModalDemo() {
         <Modal
           open={openA}
           onClose={() => setOpenA(false)}
-          title="Asignar sensor"
-          showClose
+          title="¿Estás seguro de que querés salir del entrenamiento?"
+          description="La sesión va a volver a estar disponible en la pantalla de inicio."
+          showClose={false}
           primaryAction={{ label: 'Confirmar', onClick: () => setOpenA(false) }}
           secondaryAction={{ label: 'Cancelar', onClick: () => setOpenA(false) }}
-          footerLeft={<Checkbox label="Entrena sin sensor" />}
-        >
-          <div style={{ background: 'var(--color-base-lowest)', borderRadius: 'var(--border-radius-large)', padding: 'var(--spacing-large)', color: 'var(--color-text-primary)' }}>
-            Ignacio F.
-          </div>
-          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" placeholder="Seleccionar ID" />
-        </Modal>
+        />
       </Row>
-      <Row label="Eyebrow + stacked footer (no close)">
+      <Row label="With body content, footerLeft + close">
         <button
           onClick={() => setOpenB(true)}
           className="px-4 py-2 rounded-lg text-sm font-semibold"
@@ -356,15 +366,38 @@ function ModalDemo() {
         <Modal
           open={openB}
           onClose={() => setOpenB(false)}
+          title="Asignar sensor"
+          showClose
+          primaryAction={{ label: 'Confirmar', onClick: () => setOpenB(false) }}
+          secondaryAction={{ label: 'Cancelar', onClick: () => setOpenB(false) }}
+          footerLeft={<Checkbox label="Entrena sin sensor" />}
+        >
+          <div style={{ background: 'var(--color-base-lowest)', borderRadius: 'var(--border-radius-large)', padding: 'var(--spacing-large)', color: 'var(--color-text-primary)' }}>
+            Ignacio F.
+          </div>
+          <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" placeholder="Seleccionar ID" />
+        </Modal>
+      </Row>
+      <Row label="Eyebrow + stacked footer (no close)">
+        <button
+          onClick={() => setOpenC(true)}
+          className="px-4 py-2 rounded-lg text-sm font-semibold"
+          style={{ background: 'var(--color-brand-primary)', color: '#fff' }}
+        >
+          Open modal
+        </button>
+        <Modal
+          open={openC}
+          onClose={() => setOpenC(false)}
           eyebrow="Entrenamiento activo"
           title="HIIT - Laura está activo actualmente"
           description="Comenzar un nuevo entrenamiento finalizará el actual."
           showClose={false}
           footer={
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-small)', width: '100%', paddingBottom: 'var(--spacing-medium)' }}>
-              <Button variant="secondary-branded" size="xlarge" fullWidth onClick={() => setOpenB(false)}>Continuar con HIIT - Laura</Button>
-              <Button variant="primary" size="xlarge" fullWidth onClick={() => setOpenB(false)}>Comenzar nuevo entrenamiento</Button>
-              <Button variant="tertiary" size="xlarge" fullWidth onClick={() => setOpenB(false)}>Cancelar</Button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-small)', width: '100%' }}>
+              <Button variant="secondary-branded" size="xlarge" fullWidth onClick={() => setOpenC(false)}>Continuar con HIIT - Laura</Button>
+              <Button variant="primary" size="xlarge" fullWidth onClick={() => setOpenC(false)}>Comenzar nuevo entrenamiento</Button>
+              <Button variant="tertiary" size="xlarge" fullWidth onClick={() => setOpenC(false)}>Cancelar</Button>
             </div>
           }
         />
@@ -375,20 +408,46 @@ function ModalDemo() {
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
+const CATEGORIES = [
+  { id: 'actions',    label: 'Actions',    desc: 'Interactive controls that trigger behaviour' },
+  { id: 'inputs',     label: 'Inputs',     desc: 'Form selection and input controls' },
+  { id: 'indicators', label: 'Indicators', desc: 'Labels, badges, and status chips' },
+  { id: 'layout',     label: 'Layout',     desc: 'Structure, dividers, and list rows' },
+  { id: 'feedback',   label: 'Feedback',   desc: 'System alerts and toasts' },
+  { id: 'overlays',   label: 'Overlays',   desc: 'Modals and dialogs' },
+  { id: 'cards',      label: 'Cards',      desc: 'Content containers and data cards' },
+];
+
 export default function ComponentsPage() {
   return (
-    <div className="max-w-3xl mx-auto px-10 py-12">
-      <div className="mb-10">
+    <div className="max-w-3xl mx-auto px-5 sm:px-10 pt-16 sm:pt-12 pb-8 sm:pb-12">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--color-text-primary)' }}>Components</h1>
         <p className="mb-4" style={{ color: 'var(--color-text-secondary)' }}>
           All components accept <code className="px-1.5 py-0.5 rounded text-xs" style={{ background: 'var(--color-base-low)' }}>className</code> for overrides and forward HTML element props.
           Toggle "Props ↓" on any card to see available props.
         </p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 mb-6">
           <StatusBadge status="done" />
           <StatusBadge status="planned" />
         </div>
+
+        {/* In-page TOC */}
+        <div className="flex flex-wrap gap-2">
+          {CATEGORIES.map(cat => (
+            <a
+              key={cat.id}
+              href={`#${cat.id}`}
+              className="text-xs font-medium px-3 py-1.5 rounded-full transition-colors"
+              style={{ background: 'var(--color-base-lowest)', color: 'var(--color-text-secondary)', border: '1px solid var(--color-border-high)', textDecoration: 'none' }}
+            >
+              {cat.label}
+            </a>
+          ))}
+        </div>
       </div>
+
+      <CategoryHeader id="actions" title="Actions" description="Interactive controls that trigger behaviour" />
 
       {/* ── Button ── */}
       <ComponentDoc
@@ -462,6 +521,34 @@ export default function ComponentsPage() {
         </Row>
       </ComponentDoc>
 
+      <CategoryHeader id="inputs" title="Inputs" description="Form selection and input controls" />
+
+      {/* ── Checkbox ── */}
+      <CheckboxDemo />
+
+      {/* ── Radio ── */}
+      <RadioDemo />
+
+      {/* ── Switch ── */}
+      <SwitchDemo />
+
+      {/* ── Dropdown ── */}
+      <DropdownDemo />
+
+      {/* ── Text Input (planned) ── */}
+      <ComponentDoc
+        name="Text Input"
+        status="planned"
+        description="Single-line and multiline text field with label, helper text, error state, and addons."
+        props={['label?', 'placeholder?', 'helperText?', 'error?', 'disabled?', 'leftAddon?', 'rightAddon?']}
+      >
+        <div className="w-full flex items-center justify-center py-6 rounded-lg border-2 border-dashed" style={{ borderColor: 'var(--color-base-normal)' }}>
+          <p className="text-sm" style={{ color: 'var(--color-text-disabled)' }}>Coming soon</p>
+        </div>
+      </ComponentDoc>
+
+      <CategoryHeader id="indicators" title="Indicators" description="Labels, badges, and status chips" />
+
       {/* ── Chip ── */}
       <ComponentDoc
         name="Chip"
@@ -523,6 +610,8 @@ export default function ComponentsPage() {
           <Tag type="failure"  iconOnly icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={16} color="#d00025" />} />
         </Row>
       </ComponentDoc>
+
+      <CategoryHeader id="layout" title="Layout" description="Structure, dividers, and list rows" />
 
       {/* ── Divider ── */}
       <ComponentDoc
@@ -587,22 +676,8 @@ export default function ComponentsPage() {
         </div>
       </ComponentDoc>
 
-      {/* ── InfoCard ── */}
-      <ComponentDoc
-        name="InfoCard"
-        status="done"
-        description="Information card with title, optional eyebrow, description, caption, and actions."
-        props={['orientation: horizontal | vertical', 'style: elevated | outlined | filled', 'icon?', 'eyebrow?', 'title', 'description?', 'caption?', 'actions?']}
-      >
-        <Row label="Styles — Horizontal">
-          <InfoCard style="outlined" title="Outlined" description="Description text" caption="Footer" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
-          <InfoCard style="elevated" title="Elevated" description="Description text" caption="Footer" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
-          <InfoCard style="filled" title="Filled" description="Description text" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
-        </Row>
-        <Row label="Vertical + eyebrow">
-          <InfoCard orientation="vertical" style="outlined" eyebrow="Category" title="Vertical card" description="Optional description" caption="Footer caption" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
-        </Row>
-      </ComponentDoc>
+      <CategoryHeader id="feedback" title="Feedback" description="System alerts and toasts" />
+
 
       {/* ── Alert ── */}
       <ComponentDoc
@@ -644,6 +719,30 @@ export default function ComponentsPage() {
             icon={<Icon name="warning" size={24} weight={300} variant="rounded" fill={0} color="var(--color-icon-primary)" />}
             action={<Link href="#" size="small" className="!text-[var(--color-text-primary)]">Action</Link>} />
         </div>
+      </ComponentDoc>
+
+      <CategoryHeader id="overlays" title="Overlays" description="Modals and dialogs" />
+
+      {/* ── Modal ── */}
+      <ModalDemo />
+
+      <CategoryHeader id="cards" title="Cards" description="Content containers and data cards" />
+
+      {/* ── InfoCard ── */}
+      <ComponentDoc
+        name="InfoCard"
+        status="done"
+        description="Information card with title, optional eyebrow, description, caption, and actions."
+        props={['orientation: horizontal | vertical', 'style: elevated | outlined | filled', 'icon?', 'eyebrow?', 'title', 'description?', 'caption?', 'actions?']}
+      >
+        <Row label="Styles — Horizontal">
+          <InfoCard style="outlined" title="Outlined" description="Description text" caption="Footer" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
+          <InfoCard style="elevated" title="Elevated" description="Description text" caption="Footer" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
+          <InfoCard style="filled" title="Filled" description="Description text" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
+        </Row>
+        <Row label="Vertical + eyebrow">
+          <InfoCard orientation="vertical" style="outlined" eyebrow="Category" title="Vertical card" description="Optional description" caption="Footer caption" icon={<Icon name="widgets" weight={300} variant="rounded" fill={0} size={24} color="var(--color-icon-primary)" />} />
+        </Row>
       </ComponentDoc>
 
       {/* ── TrainingCard ── */}
@@ -715,32 +814,6 @@ export default function ComponentsPage() {
         buttonLabel="Zone Down ↓"
       />
 
-      {/* ── Checkbox ── */}
-      <CheckboxDemo />
-
-      {/* ── Radio ── */}
-      <RadioDemo />
-
-      {/* ── Switch ── */}
-      <SwitchDemo />
-
-      {/* ── Dropdown ── */}
-      <DropdownDemo />
-
-      {/* ── Modal ── */}
-      <ModalDemo />
-
-      {/* ── Text Input (planned) ── */}
-      <ComponentDoc
-        name="Text Input"
-        status="planned"
-        description="Single-line and multiline text field with label, helper text, error state, and addons."
-        props={['label?', 'placeholder?', 'helperText?', 'error?', 'disabled?', 'leftAddon?', 'rightAddon?']}
-      >
-        <div className="w-full flex items-center justify-center py-6 rounded-lg border-2 border-dashed" style={{ borderColor: 'var(--color-base-normal)' }}>
-          <p className="text-sm" style={{ color: 'var(--color-text-disabled)' }}>Coming soon</p>
-        </div>
-      </ComponentDoc>
     </div>
   );
 }

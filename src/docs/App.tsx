@@ -189,9 +189,9 @@ function OverviewPage({ onNavigate }: { onNavigate: (p: Page) => void }) {
   const isDark = theme === 'dark';
 
   return (
-    <div className="max-w-3xl mx-auto px-10 py-12">
+    <div className="max-w-3xl mx-auto px-5 sm:px-10 pt-16 sm:pt-12 pb-8 sm:pb-12">
       {/* Hero */}
-      <div className="mb-12">
+      <div className="mb-10 sm:mb-12">
         <div
           className="inline-flex items-center gap-2 text-[#eb282c] text-xs font-semibold px-3 py-1 rounded-full mb-4"
           style={{ background: isDark ? 'rgba(235,40,44,0.15)' : '#fcdfe0' }}
@@ -199,20 +199,20 @@ function OverviewPage({ onNavigate }: { onNavigate: (p: Page) => void }) {
           <span className="size-1.5 rounded-full bg-[#eb282c] inline-block" />
           Design System
         </div>
-        <h1 className="text-4xl font-bold mb-4 leading-tight" style={{ color: 'var(--color-text-primary)' }}>
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4 leading-tight" style={{ color: 'var(--color-text-primary)' }}>
           Kardia Design System
         </h1>
-        <p className="text-lg leading-relaxed max-w-xl" style={{ color: 'var(--color-text-secondary)' }}>
+        <p className="text-base sm:text-lg leading-relaxed max-w-xl" style={{ color: 'var(--color-text-secondary)' }}>
           A single source of truth for tokens and UI components across all Kardia platforms — web, mobile, and Flutter.
           Tokens are defined once in DTCG format and compiled to CSS, TypeScript, and Dart.
         </p>
       </div>
 
       {/* Quick cards */}
-      <div className="grid grid-cols-3 gap-4 mb-12">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 sm:mb-12">
         {[
           { label: 'Design Tokens', count: '60+', desc: 'Colors, spacing, radius, typography', page: 'tokens' as Page },
-          { label: 'Components', count: '11', desc: 'React components, all typed', page: 'components' as Page },
+          { label: 'Components', count: '16', desc: 'React components, all typed', page: 'components' as Page },
           { label: 'Platforms', count: '3', desc: 'Web CSS · TypeScript · Flutter', page: null },
         ].map(card => (
           <button
@@ -233,7 +233,7 @@ function OverviewPage({ onNavigate }: { onNavigate: (p: Page) => void }) {
 
       {/* Stack */}
       <Section title="Tech Stack">
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {[
             { name: 'Style Dictionary v4', role: 'Token compilation → CSS, TS, Dart', tag: 'build' },
             { name: 'React 19 + TypeScript', role: 'Component library', tag: 'components' },
@@ -268,9 +268,12 @@ function OverviewPage({ onNavigate }: { onNavigate: (p: Page) => void }) {
               </span>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium mb-1" style={{ color: 'var(--color-text-primary)' }}>{s.title}</p>
-                <code className="block text-xs px-3 py-2 rounded-lg font-mono whitespace-nowrap overflow-x-auto" style={{ background: 'var(--color-base-low)', color: 'var(--color-text-primary)' }}>
-                  {s.code}
-                </code>
+                <div className="flex items-center gap-1 rounded-lg overflow-hidden" style={{ background: 'var(--color-base-low)' }}>
+                  <code className="flex-1 text-xs px-3 py-2 font-mono whitespace-nowrap overflow-x-auto" style={{ color: 'var(--color-text-primary)', background: 'transparent' }}>
+                    {s.code}
+                  </code>
+                  <CopyButton text={s.code} />
+                </div>
               </div>
             </div>
           ))}
@@ -302,5 +305,26 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <h2 className="text-base font-semibold mb-4 pb-2" style={{ color: 'var(--color-text-primary)', borderBottom: '1px solid var(--color-border-high)' }}>{title}</h2>
       {children}
     </div>
+  );
+}
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  function copy() {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }
+  return (
+    <button
+      onClick={copy}
+      className="shrink-0 flex items-center justify-center rounded-md transition-colors"
+      style={{ width: 32, height: 32, color: copied ? 'var(--color-text-success)' : 'var(--color-text-secondary)' }}
+      aria-label="Copy to clipboard"
+      title="Copy"
+    >
+      <Icon name={copied ? 'check' : 'content_copy'} size={16} weight={300} variant="rounded" fill={0} />
+    </button>
   );
 }

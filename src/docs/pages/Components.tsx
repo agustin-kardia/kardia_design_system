@@ -372,8 +372,22 @@ function ModalDemo() {
           secondaryAction={{ label: 'Cancelar', onClick: () => setOpenB(false) }}
           footerLeft={<Checkbox label="Entrena sin sensor" />}
         >
-          <div style={{ background: 'var(--color-base-lowest)', borderRadius: 'var(--border-radius-large)', padding: 'var(--spacing-large)', color: 'var(--color-text-primary)' }}>
-            Ignacio F.
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--spacing-large)',
+            padding: 'var(--spacing-medium) var(--spacing-large)',
+            borderRadius: 'var(--border-radius-large)',
+            background: 'var(--color-base-flat)',
+          }}>
+            <img
+              src="https://placehold.co/48x48/2A2A2A/888?text=I"
+              alt=""
+              style={{ width: 48, height: 48, borderRadius: 120, objectFit: 'cover', flexShrink: 0, border: '1px solid var(--color-border-normal)' }}
+            />
+            <span style={{ fontFamily: 'Archivo, sans-serif', fontWeight: 600, fontSize: 'var(--typography-h5-600-font-size)', lineHeight: 1.25, color: 'var(--color-text-primary)' }}>
+              Ignacio F
+            </span>
           </div>
           <Dropdown options={SENSOR_OPTIONS} label="ID del sensor" placeholder="Seleccionar ID" />
         </Modal>

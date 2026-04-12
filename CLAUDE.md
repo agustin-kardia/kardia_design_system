@@ -55,11 +55,14 @@ npm run tokens:build # Run Style Dictionary only
 ## Publishing workflow
 The package is installed directly from GitHub — no npm registry.
 
-1. Make changes to `src/`
-2. `npm run build` (rebuilds `dist/`)
-3. Commit **both** source and `dist/` files
-4. `git push origin main`
-5. In consuming apps: `npm install design-tokens@github:agustin-kardia/kardia_design_system`
+1. Make changes to `src/components/`
+2. **Update the docs page** — reflect the change in `src/docs/pages/Components.tsx` (update the demo for the affected component to match the new design/API)
+3. `npm run build` (rebuilds `dist/`)
+4. Commit **both** source and `dist/` files
+5. `git push origin main`
+6. In consuming apps: `npm install design-tokens@github:agustin-kardia/kardia_design_system`
+
+**Critical:** Always update the docs demo when a component's visual design or API changes. The docs site is the source of truth for what components look like and how to use them.
 
 The docs site (GitHub Pages) deploys automatically via GitHub Actions on every push to main. It runs `npm run tokens:build && npm run docs:build` and deploys `docs-dist/`.
 

@@ -4,7 +4,6 @@
   flex-direction: row;
   align-items: stretch;
   height: 108px;
-  min-width: 320px;
   overflow: hidden;
   border-radius: var(--border-radius-xlarge);
   background: var(--color-base-flat);

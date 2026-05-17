@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import TokensPage from './pages/Tokens';
 import ComponentsPage from './pages/Components';
+import AnimationsPage from './pages/Animations';
 import { useTheme } from './ThemeContext';
 import { ThemeToggle } from './ThemeToggle';
 import { KardiaIsotipo } from '../assets/logos/KardiaIsotipo';
 import { Icon } from '../components/Icon/Icon';
 
-type Page = 'overview' | 'tokens' | 'components';
+type Page = 'overview' | 'tokens' | 'components' | 'animations';
 
 const NAV: { id: Page; label: string; icon: string }[] = [
   { id: 'overview', label: 'Overview', icon: 'home' },
   { id: 'tokens', label: 'Tokens', icon: 'deployed_code' },
   { id: 'components', label: 'Components', icon: 'dashboard' },
+  { id: 'animations', label: 'Animations', icon: 'animation' },
 ];
 
 export default function App() {
@@ -178,6 +180,7 @@ export default function App() {
           {page === 'overview' && <OverviewPage onNavigate={navigate} />}
           {page === 'tokens' && <TokensPage />}
           {page === 'components' && <ComponentsPage />}
+          {page === 'animations' && <AnimationsPage />}
         </main>
       </div>
     </>
